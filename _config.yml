@@ -65,7 +65,6 @@ width: large
 
 # if you don't want a particular section, set it to false
 projects: true
-bass: true
 about: true
 blog: true
 
