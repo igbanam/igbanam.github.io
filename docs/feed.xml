@@ -5,9 +5,49 @@
     <description>These are my thoughts.</description>
     <link>https://igbanam.github.io/</link>
     <atom:link href="https://igbanam.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 10 Oct 2021 20:25:09 +0000</pubDate>
-    <lastBuildDate>Sun, 10 Oct 2021 20:25:09 +0000</lastBuildDate>
+    <pubDate>Sun, 10 Oct 2021 20:35:41 +0000</pubDate>
+    <lastBuildDate>Sun, 10 Oct 2021 20:35:41 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Scrollable Box</title>
+        <description>&lt;p&gt;CSS has come a long way!&lt;/p&gt;
+
+&lt;p&gt;I recently was trying to make a box scrollable within the view. This box should take the height of the viewport, but could have content which exceed that height. Now, back in the day, I would have done this with Javascript. I had gotten ready to bite the bullet and get this written in Javascript, but something asked me to google “Maths in CSS”. I found &lt;a href=&quot;https://css-tricks.com/keep-math-in-the-css/&quot;&gt;this post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;css-tricks&quot;&gt;CSS Tricks&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+-----------------------------------------+  * {
+|                   1                     |    --banner-height: 20px;
++-----------+-----------------------------+  }
+|           |                             |
+|           |                             |  #1 {
+|           |                             |    height: var(--banner-height);
+|           |                             |  }
+|           |                             |
+|           |                             |  #2 {
+|     2     |              3              |    height: calc(100vh - var(--banner-height));
+|           |                             |    overflow-x: hidden;
+|           |                             |    overflow-y: auto;
+|           |                             |  }
+|           |                             |
+|           |                             |  #4 {
++-----------+-----------------------------+    height: var(--banner-height);
+|                   4                     |  }
++-----------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Sun, 10 Oct 2021 19:55:00 +0000</pubDate>
+        <link>https://igbanam.github.io/scrollable-box/</link>
+        <guid isPermaLink="true">https://igbanam.github.io/scrollable-box/</guid>
+        
+        <category>css</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>On the Quest of Origins</title>
