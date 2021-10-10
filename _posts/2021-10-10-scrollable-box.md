@@ -25,9 +25,8 @@ I recently was trying to make a box scrollable within the view. This box should 
 |           |                             |
 |           |                             |  #2 {
 |     2     |              3              |    height: calc(100vh - var(--banner-height));
-|           |                             |  }
-|           |                             |
-|           |                             |  #3 {
+|           |                             |    overflow-x: hidden;
+|           |                             |    overflow-y: auto;
 |           |                             |  }
 |           |                             |
 |           |                             |  #4 {
