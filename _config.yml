@@ -24,11 +24,10 @@ permalink: /:title/
 # if you don't want comments in your posts, leave categories empty
 disqus:
   shortname: igbanam
-  categories: [blog, project]
+  categories: []
 
 # if you don't have any of social below, comment the line
 # email: email@host.com
-# gitlab: mygitlab
 # google: mygoogle
 # lanyrd: mylanyrd
 # lastfm: mylastfm
@@ -37,14 +36,15 @@ disqus:
 # reddit: username
 # spotify: myspotify
 # vimeo: myvimeo
-# youtube: myyoutube
-facebook: igbanam
+# facebook: igbanam
 github: igbanam
+gitlab: igbanam
 instagram: yaasky
 linkedin: igbanam
 medium: yaasky
 stackoverflow: 393021/igbanam
 twitter: yaasky
+youtube: channel/UCBd-1N6SsU7X0q9YXO7cERw
 
 authors:
     igbanam:
