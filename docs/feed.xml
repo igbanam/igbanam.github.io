@@ -5,9 +5,156 @@
     <description>These are my thoughts.</description>
     <link>https://igbanam.github.io/</link>
     <atom:link href="https://igbanam.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 15 Oct 2021 00:35:51 +0000</pubDate>
-    <lastBuildDate>Fri, 15 Oct 2021 00:35:51 +0000</lastBuildDate>
+    <pubDate>Fri, 15 Oct 2021 00:48:13 +0000</pubDate>
+    <lastBuildDate>Fri, 15 Oct 2021 00:48:13 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>A Journey into CLI Mail Clients</title>
+        <description>&lt;p&gt;I enjoy GMail shortcuts. I don’t use up to 10% of the available shortcuts, but the ability to navigate with the keyboard has always been fascinating. While playing with GMail shortcuts, I wondered “Surely, there must be a way to read email in the terminal. I don’t want to keep opening my browser every time I have mail.” A little googling and I found some interesting projects.&lt;/p&gt;
+
+&lt;h2 id=&quot;himalaya&quot;&gt;Himalaya&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/soywod/himalaya&quot;&gt;Himalaya&lt;/a&gt; is a CLI email client written in Rust. I had seen other email clients, but what &lt;a href=&quot;https://github.com/soywod/himalaya/pull/224&quot;&gt;attracted me&lt;/a&gt; to Himalaya was its optional Vim front, and the simplicity in setup. You can get up and running in no time. Another cool feature is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;imap-password-cmd&lt;/code&gt; option in the setup. This allows you use a password manager to store your passwords locally; thus your password never gets into a config file. I have mine setup with &lt;a href=&quot;https://bitwarden.com/&quot;&gt;Bitwarden&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;setting-up-himalaya&quot;&gt;Setting up Himalaya&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create a new file at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.config/himalaya/config.toml&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Dump the configuration below into that file&lt;/li&gt;
+  &lt;li&gt;Change everything in angle brackets &amp;lt;&amp;gt; to your personal information&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;…as easy as 1, 2, 3!&lt;/p&gt;
+
+&lt;div class=&quot;language-toml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;MY NAME&amp;gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;downloads-dir&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/global/path/to/your/downloads/folder&quot;&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;signature&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+
+--
+&amp;lt;MY NAME&amp;gt;, written in Himalaya
+&quot;&quot;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nn&quot;&gt;[gmail]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;MY ALIAS&amp;gt;@gmail.com&quot;&lt;/span&gt;
+
+&lt;span class=&quot;py&quot;&gt;imap-host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;imap.gmail.com&quot;&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;imap-port&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;993&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;imap-login&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;MY ALIAS&amp;gt;@gmail.com&quot;&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;imap-passwd-cmd&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bw get password Himalaya-GMail&quot;&lt;/span&gt;
+
+&lt;span class=&quot;py&quot;&gt;smtp-host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;smtp.gmail.com&quot;&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;smtp-port&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;465&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;smtp-login&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;MY ALIAS&amp;gt;@gmail.com&quot;&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;smtp-passwd-cmd&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bw get password Himalaya-GMail&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is all the setup required for Himalaya; for GMail. Other mail servers like Yahoo and Hotmail would have different authentication details.&lt;/p&gt;
+
+&lt;h3 id=&quot;pros-and-cons&quot;&gt;Pros and Cons&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The interface is small enough for you to get it&lt;/li&gt;
+  &lt;li&gt;Configuration is password-safe&lt;/li&gt;
+  &lt;li&gt;IT HAS A VIM FRONT END 🔥🔥🔥&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Cons&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Every is a new request, is a new connection to the mail server&lt;/li&gt;
+  &lt;li&gt;Very much in its alpha stage; not yet production ready&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;mutt&quot;&gt;Mutt&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.mutt.org/&quot;&gt;Mutt&lt;/a&gt; comes off in the &lt;em&gt;interwebs&lt;/em&gt; as the most robust terminal client for emails. The project is more than 20 years old. There’s a lot more control over email in Mutt. The basic configuration to get started however, is not much different from Himalaya.&lt;/p&gt;
+
+&lt;h3 id=&quot;getting-started-with-mutt&quot;&gt;Getting started with Mutt&lt;/h3&gt;
+
+&lt;p&gt;Mutt is a lot like Vim: everyone’s setup is a tad bit different. But there are some similarities which yield a baseline. To get started with Mutt, we need to know some things about emails. The SMTP protocol is plenty. Here’s my setup.&lt;/p&gt;
+
+&lt;p&gt;First, some pre-requisites&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-muttrc&quot;&gt;mkdir -p ~/.mutt/{headers, bodies}
+touch ~/.mutt/certificates
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.mutt/muttrc&lt;/code&gt; follows.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-muttrc&quot;&gt;# ===============  IMAP Settings  ===================
+set imap_user = &quot;&amp;lt;MY ALIAS&amp;gt;@gmail.com&quot;
+set imap_pass = &quot;&amp;lt;MY PASSWORD&amp;gt;&quot;
+set smtp_url = &quot;smtp://&amp;lt;MY ALIAS&amp;gt;@smtp.gmail.com:587/&quot;
+set smtp_pass = $imap_pass
+set ssl_force_tls = yes
+set smtp_authenticators = 'gssapi:login'
+
+# ============  Folder Organization  ================
+set folder = &quot;imaps://imap.gmail.com/&quot;
+set spoolfile = &quot;+INBOX&quot;
+set postponed = &quot;+[Gmail]/Drafts&quot;
+set record = &quot;+[Gmail]/Sent Mail&quot;
+set trash = &quot;+[Gmail]/Trash&quot;
+
+# ===============  Mutt Specifics  ==================
+set header_cache = &quot;~/.mutt/cache/headers&quot;
+set message_cachedir = &quot;~/.mutt/cache/bodies&quot;
+set certificate_file = &quot;~/.mutt/certificates&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;pros-and-cons-1&quot;&gt;Pros and Cons&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Mutt does everything email; so robust!&lt;/li&gt;
+  &lt;li&gt;You can theme Mutt …the same way you theme Vim&lt;/li&gt;
+  &lt;li&gt;The muttrc allows you to &lt;a href=&quot;https://ryanlue.com/posts/2017-05-21-mutt-the-vim-way&quot;&gt;setup Mutt like Vim&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Cons&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Learning Curve&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;a-note-on-security&quot;&gt;A Note on Security&lt;/h2&gt;
+
+&lt;p&gt;For congruent setups across devices, you may want to check-in your configuration into source control. Remember it is safe to do this for Himalaya, it may not be safe to do this in Mutt if you have your password plain in your muttrc. One way to solve this problem is to have your password as an environment variable in your shell&lt;/p&gt;
+
+&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.zprofile&lt;/code&gt; (or somewhere)&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;MUTT_IMAP_PASS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;MY PASSWORD&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;then in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.mutt/muttrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-muttrc&quot;&gt;set imap_pass = $MUTT_IMAP_PASS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;my-journey-so-far&quot;&gt;My journey so far…&lt;/h2&gt;
+
+&lt;p&gt;I am currently interested in both projects. Himalaya as the new contender, and Mutt as the veteran in the space. On Himalaya… I am &lt;a href=&quot;https://github.com/soywod/himalaya/pull/224&quot;&gt;actively contributing&lt;/a&gt; to Himalaya’s Vim front. I believe it has a lot of potential. Though — I must confess — there’s the gnawing voice at the back of my head telling me “This project stretches Vim beyond what it was built for.” But it’s interesting to work with email in the same space you work with code. On Mutt… I am learning the space. If the shortcuts feel too alien, I would look to merge my Vim &lt;del&gt;habits&lt;/del&gt; bindings into Mutt. For now, I am still playing with the colors. Next steop, multi-account emails in Mutt. My Mutt is wired up to send emails using Vim; this too is possible.&lt;/p&gt;
+
+&lt;p&gt;We move&lt;/p&gt;
+
+&lt;h1&gt;🚀&lt;/h1&gt;
+
+</description>
+        <pubDate>Thu, 14 Oct 2021 22:38:00 +0000</pubDate>
+        <link>https://igbanam.github.io/a-journey-into-cli-mail-clients/</link>
+        <guid isPermaLink="true">https://igbanam.github.io/a-journey-into-cli-mail-clients/</guid>
+        
+        <category>cli</category>
+        
+        <category>email</category>
+        
+        <category>vim</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>Scrollable Box</title>
