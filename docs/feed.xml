@@ -5,9 +5,71 @@
     <description>These are my thoughts.</description>
     <link>https://igbanam.github.io/</link>
     <atom:link href="https://igbanam.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Nov 2021 10:20:13 +0000</pubDate>
-    <lastBuildDate>Thu, 04 Nov 2021 10:20:13 +0000</lastBuildDate>
+    <pubDate>Thu, 04 Nov 2021 10:32:50 +0000</pubDate>
+    <lastBuildDate>Thu, 04 Nov 2021 10:32:50 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>What distinguishes Software Engineers</title>
+        <description>&lt;p&gt;In conversation with one of my accountant friends who works in insurance, he made me realize “There is no standard for software engineering.” In accounting, certification exams stratify accountants. They gate the industry, raising the standard of professionals. Software Engineering has adopts the free-for-all approach. So long as you can type some instructions into a computer, and have the computer run it, you can categorize yourself a software engineer. Your ability to market your skills, and rise in the social ladder will get you “recognized”. There are &lt;a href=&quot;https://www.linkedin.com/feed/update/urn:li:activity:6844001756108734464/&quot;&gt;some certificates&lt;/a&gt; within software engineering, but these are not as enforced as in other industries. How then do we tell good engineers from the lot?&lt;/p&gt;
+
+&lt;p&gt;Software Engineering is a people business. People think. People create. People maintain. These are some traits which distinguish good software engineers from the lot.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Competence&lt;/li&gt;
+  &lt;li&gt;Maximizes Current Value of Work&lt;/li&gt;
+  &lt;li&gt;Practical Informed Decision-Making&lt;/li&gt;
+  &lt;li&gt;Enabling others to make decisions efficiently&lt;/li&gt;
+  &lt;li&gt;Continuous Learning&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;competence&quot;&gt;Competence&lt;/h2&gt;
+
+&lt;p&gt;Competence is the bedrock of value-generation in any value-system. Competence in software is now everywhere in the interwebs. I call this &lt;em&gt;distributed competence&lt;/em&gt;. A good engineer, however has this distributed competence localized. Localized competence allows an engineer move faster with software. This competence revolves primarily around technical coding skills. This competence is must be tool-agnostic. The focus here is on the quality of code written. How performant is it? If given to a 5 year old, can the 5 year old explain the algorithm?&lt;/p&gt;
+
+&lt;h2 id=&quot;maximizing-current-value-of-work&quot;&gt;Maximizing current value of work&lt;/h2&gt;
+
+&lt;p&gt;To explain this, I must posit two hand-wavy lemmas. First, “Creating software costs money.” The value of engineer-time has grown astronomically over the years. Second, “Software is built to be maintained.” Good businesses want repeat customers; not only one-time customers. On these two lemmas, every software change has a long-term economic value. A good software engineer takes this into consideration with every new change.&lt;/p&gt;
+
+&lt;p&gt;There’s always a new-cool way to get something done. But is it the best way? Hacks through a system create technical debt. This accrues to slow development down over time. Unfortunately, people are less inclined to clean up technical debt when the opportunity cost is losing some potential new business. The optimal and ideal software engineer creates no technical debt. The optimal and ideal software engineer does not exist. However, a good software engineer minimizes the pain of future software engineers maintaining their work.&lt;/p&gt;
+
+&lt;h2 id=&quot;practises-informed-decision-making&quot;&gt;Practises informed decision-making&lt;/h2&gt;
+
+&lt;p&gt;I remember a quote which explained software in a unique light. I do not remember the exact wordings, but paraphrased, it sounds something like…&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A software product is a snapshot of the progression of decisions over time on the subject matter by a certain group of people.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;While building software products, software professionals must make and change decisions to continually. These decisions serve to align the software product to the domain where it lives and works, in order to maximize profit — in whatever metric profit is defined as. Another type of decisions made in software engineering is trade-offs. Ever heard the phrase “There are many ways to kill a cat”? That’s true in software more than other industries. Take the Javascript community as an example. If you’re looking for a library to do X, there are on average 100+ packages which vend X. How do you choose which one? If we unfreeze the Javascript decision, how do we select which language vends the best tooling to do X? What do we leave behind? These trade-offs happen daily — sometimes unconsciously — in software engineering. A good software engineer sees clearly enough to make decisions with the best trade-offs for the product.&lt;/p&gt;
+
+&lt;p&gt;Over time, our decision making gets “trained”. The frame of mind through which we view software freezes into a “comfort zone”. A good software engineer is able to occasionally “break frame” in order to gain new insight when making decisions. A broken frame of mind is better at gathering information. A frozen frame of mind is better at filtering information. Both of these are necessary in decision-making.&lt;/p&gt;
+
+&lt;h2 id=&quot;engenders&quot;&gt;Engenders&lt;/h2&gt;
+
+&lt;p&gt;Up until now, all traits we have seen has focused on the individual. While it’s often to great to be a “10x Engineer”, durable software is often built in teams. A good software engineers knows this and replicates these skills in colleagues.&lt;/p&gt;
+
+&lt;p&gt;Engendering includes — but is not limited to — acts pairing, mentoring, supporting, …. Pairing is beneficial both ways. Each part of the pair gets to learn how the other parts does software. Every engineer is unique. Mentoring shares experience and expertise over time. Supporting is often done by more experienced engineers, so less experienced engineers have a safer environment to grow and experiment. These are short explanations to these; but entire volumes can be written about each.&lt;/p&gt;
+
+&lt;h2 id=&quot;continuous-learning&quot;&gt;Continuous Learning&lt;/h2&gt;
+
+&lt;p&gt;No good engineer stays good forever. The industry keeps changing. In order to stay up to date with best practices, engineers must constantly learn. Good engineers maintain a high level of curiosity towards their work. If something does not work, they dive deep into why it doesn’t work. If something works, they dive deeper into why it works. This this continuous learning breeds competence in engineers; and the cycle restarts and continues ad infinitum.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Software Engineering may not have a single examination to filter out professionals. The human-centric nature of the discipline makes it difficult to measure. These five traits should closely approximate the filtering mechanism for distinguishing good engineers from the lot. If you end up abstracting this into some mechanized test, please reach out to me through one of my socials on &lt;a href=&quot;https://igbanam.github.io/&quot;&gt;my homepage&lt;/a&gt; — preferably Twitter. Until then, build good software.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 04 Nov 2021 08:28:00 +0000</pubDate>
+        <link>https://igbanam.github.io/what-distinguishes-software-engineers/</link>
+        <guid isPermaLink="true">https://igbanam.github.io/what-distinguishes-software-engineers/</guid>
+        
+        <category>software</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>A Journey into CLI Mail Clients</title>
@@ -867,54 +929,6 @@ use this private key while running your deploys.&lt;/p&gt;
         
         
         <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>BellBoy</title>
-        <description>&lt;p&gt;Oftentimes as software engineers, or generally as consultants, we want to keep track of our time for maximum profit. There are many time-tracking tools out there. I use &lt;a href=&quot;https://nokotime.com/&quot;&gt;Nokotime&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Did you know NokoTime is built with &lt;a href=&quot;https://rubyonrails.org&quot;&gt;Rails&lt;/a&gt;?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Logging your time is good and all, but I had an issue with this. While working in my terminal, I had to leave the comfort of my terminal screen into some web page to log time. This context switch made me feel like I was losing time, albeit seconds, time nonetheless. I thought to fix this.&lt;/p&gt;
-
-&lt;p&gt;The solution provided by NokoTime is an application which sits on your Mac status bar. You can start it or stop it. When the time recording is stopped, it puts the time up at NokoTime as a logged time for the information you entered beforehand. While this worked flawlessly, I still had the problem of context switching.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Did you know the Mac app for NokoTime is built using &lt;a href=&quot;http://www.rubymotion.com/&quot;&gt;RubyMotion&lt;/a&gt;?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/igbanam/bellboy&quot;&gt;Bellboy&lt;/a&gt; is a commandline tool which allows you log time right from the comfort of your terminal.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ./bellboy
-
-USAGE
-=====
-  bellboy projects
-  bellboy log TIME --for PROJECT_ID
-  bellboy [-h | --help]
-  bellboy [-v | --version]
-
-ARGS
-====
-
-    PROJECT_ID    The ID of the PROJECT to log time for
-    TIME          Time in minutes
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;At this time, you can see all your projects on NokoTime, and you can also log time for a particular project. I am thinking of more features to add which makes this easier to work with. Maybe a Vim plugin? I don’t know. If you have ideas, please &lt;a href=&quot;https://github.com/igbanam/bellboy/issues&quot;&gt;open an issue&lt;/a&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 09 Sep 2019 13:25:00 +0000</pubDate>
-        <link>https://igbanam.github.io/bellboy/</link>
-        <guid isPermaLink="true">https://igbanam.github.io/bellboy/</guid>
-        
-        <category>elixir</category>
-        
-        
-        <category>project</category>
         
       </item>
     
