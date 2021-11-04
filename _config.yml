@@ -28,7 +28,9 @@ disqus:
 
 # if you don't have any of social below, comment the line
 # email: email@host.com
+# facebook: igbanam
 # google: mygoogle
+# instagram: yaasky
 # lanyrd: mylanyrd
 # lastfm: mylastfm
 # pinterest: mypinterest
@@ -36,10 +38,8 @@ disqus:
 # reddit: username
 # spotify: myspotify
 # vimeo: myvimeo
-# facebook: igbanam
 github: igbanam
 gitlab: igbanam
-instagram: yaasky
 linkedin: igbanam
 medium: yaasky
 stackoverflow: 393021/igbanam
