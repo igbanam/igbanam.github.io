@@ -5,8 +5,8 @@
     <description>These are my thoughts.</description>
     <link>https://igbanam.github.io/</link>
     <atom:link href="https://igbanam.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Nov 2021 10:32:50 +0000</pubDate>
-    <lastBuildDate>Thu, 04 Nov 2021 10:32:50 +0000</lastBuildDate>
+    <pubDate>Fri, 03 Dec 2021 15:37:21 +0000</pubDate>
+    <lastBuildDate>Fri, 03 Dec 2021 15:37:21 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -151,7 +151,7 @@ set imap_pass = &quot;&amp;lt;MY PASSWORD&amp;gt;&quot;
 set smtp_url = &quot;smtp://&amp;lt;MY ALIAS&amp;gt;@smtp.gmail.com:587/&quot;
 set smtp_pass = $imap_pass
 set ssl_force_tls = yes
-set smtp_authenticators = 'gssapi:login'
+set smtp_authenticators = &apos;gssapi:login&apos;
 
 # ============  Folder Organization  ================
 set folder = &quot;imaps://imap.gmail.com/&quot;
@@ -525,7 +525,7 @@ puts Array.new.respond_to?&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;:interse
 
 &lt;p&gt;&lt;strong&gt;Benchmarker&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;require 'benchmark'
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;require &apos;benchmark&apos;
 
 a = (1..8).to_a
 b = (2..9).to_a
@@ -557,7 +557,7 @@ Time for a.difference b
 
 &lt;p&gt;&lt;strong&gt;Benchmarker&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'benchmark'&lt;/span&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;benchmark&apos;&lt;/span&gt;
 
 &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_a&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_a&lt;/span&gt;
@@ -664,7 +664,7 @@ Actions run on specific events in the Github ecosystem. Push and Pull Request ar
       &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;POSTGRES_USER&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;runner&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;POSTGRSE_DB&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;project_test&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;POSTGRES_PASSWORD&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;POSTGRES_PASSWORD&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;&lt;/span&gt;
       &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;5432&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;5432&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
