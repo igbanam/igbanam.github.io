@@ -5,9 +5,32 @@
     <description>These are my thoughts.</description>
     <link>https://igbanam.github.io/</link>
     <atom:link href="https://igbanam.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 03 Dec 2021 15:37:21 +0000</pubDate>
-    <lastBuildDate>Fri, 03 Dec 2021 15:37:21 +0000</lastBuildDate>
+    <pubDate>Sun, 05 Dec 2021 11:33:49 +0000</pubDate>
+    <lastBuildDate>Sun, 05 Dec 2021 11:33:49 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>I left Instagram. Here&apos;s why.</title>
+        <description>&lt;p&gt;I left cos Instagram turned on my camera multiple times while I was scrolling through the timeline. This happened during the morning of October 30. The only way I could catch this was cos the recently released Android 12 on the Pixel 5 has an indicator when an up is accessing you camera or your microphone — I was on the beta release at this time. I chance-saw this blink on twice while scrolling Instagram’s timeline. I then checked the Privacy Dashboard — another feature in this new release — and I saw Instagram accessed the camera momentarily a couple of times. These are the facts.&lt;/p&gt;
+
+&lt;p&gt;Now, the inferences. I couldn’t help but wonder why the camera should turn on when I didn’t explicitly ask that from the app. I couldn’t help but think Instagram takes photos of people scrolling timeline. This suspicion fed into the myth for ads placement. That feeling that Instagram listens. Often exacerbated with ads popping up in timeline when you talk about something with your friends in the presence of your phone — just to site one scenario. These are my inferences.&lt;/p&gt;
+
+&lt;p&gt;The justification and my resignation shows how much of a bind Instagram and its users are in concerning privacy. Before we start using the service, we agree to terms and conditions we most times don’t read. And why not? When the sell is to connect with friends and family, that’s an emotional tug. Logic slips into the cognitive blindspot at that point. This is where the magic happens. The Terms and Conditions force users into agreeing to making a logical decision which fixes an emotional need. In those terms — I presume, cos I still have not read them — there could be something which allows Instagram to use and publish visual content captured from the phone’s camera. Basic legal covering of the bases. This would allow the service capture photos and share them on the network. A corollary to this is the permissions requested from the app on the phone’s OS. Once this is granted, pictures can be captured. This is the ideal service. However, to every face that shows a coin’s value, there’s an under-face often hidden; and every beautiful snake skin would have an underbelly which plays in the mud. The other side of this ideal service is: once these terms are signed and the permissions are granted, there’s no further way to restrict the service. Privacy is thus a game lost before it’s started.&lt;/p&gt;
+
+&lt;p&gt;My resignation is here. It’s in the truth that I’ve always known this. Being an engineer myself, I’m aware of the power people freely give up in blind trust that all tech is ethical. But to see it happen to me, to see the myth confirmed, …that just blew my mind into irrecoverable bits. I know many people need Instagram. Heck, it’s like the Spice in Dune — if you’ve read the book. “Once you have gotten a taste of it, to remove yourself from it is to die.” And yes, leaving Instagram is a death of sorts; a social death. Focusing on the death bits colours this dark and sad. However, all deaths are births unknown. So I’m curious and excited to see where this new birth leads.&lt;/p&gt;
+
+&lt;p&gt;It’s the end of me and Facebook’s family of apps; except WhatsApp.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 01 Dec 2021 14:42:00 +0000</pubDate>
+        <link>https://igbanam.github.io/i-left-instagram-here-s-why/</link>
+        <guid isPermaLink="true">https://igbanam.github.io/i-left-instagram-here-s-why/</guid>
+        
+        <category>social media</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>What distinguishes Software Engineers</title>
@@ -840,92 +863,6 @@ Actions run on specific events in the Github ecosystem. Push and Pull Request ar
         <category>rails</category>
         
         <category>ddd</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>Deploying Rails to AWS</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;TL;DR If Rails can be deployed on a VPS, can it be deployed on a shared server?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I want to build applications which value. One of the most important steps in my value chain is deploying this application; bringing the application into the customer’s hands. There are many platforms through which I can deliver my application. One of the easiest to use is Heroku which provides a platform, and orchestrates most of the deployment details away. For the longest time, I deployed Rails applications using the command below&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push heroku feature-branch:master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Recently, I looked into what it would take to deploy Rails into a VPS which I had complete control over. It was quite an interesting exercise; laced with even more interesting problems. Here, I would detail the steps I used in getting Rails 6 deployed on an AWS VPS.&lt;/p&gt;
-
-&lt;p&gt;What did I need&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;A server&lt;/li&gt;
-  &lt;li&gt;A database&lt;/li&gt;
-  &lt;li&gt;A deployment tool&lt;/li&gt;
-  &lt;li&gt;An application to deploy&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;a-server&quot;&gt;A Server&lt;/h2&gt;
-
-&lt;p&gt;To get the server running, I provisioned an Ubuntu server on AWS EC2. This is available in the free tier. I chose Ubuntu because I am comfortable with its terminal environment. You can use any linux box you’re comfortable with. The commands I use here are specific to Ubuntu. Do well to find and use the equivalent for your Linux box.&lt;/p&gt;
-
-&lt;p&gt;To Launch the EC2 instance:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;select EC2 from the list of AWS services&lt;/li&gt;
-  &lt;li&gt;click on “Launch Instance”&lt;/li&gt;
-  &lt;li&gt;the defaults should be fine, but do well to click through them&lt;/li&gt;
-  &lt;li&gt;at the Security Group, make sure to open up port 80 for web traffic; it’s closed by default&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;At this point, I am thinking “Someone should have done the work. This isn’t novel.” So I go to google, searching. I see this &lt;a href=&quot;https://gorails.com/deploy/ubuntu/18.04&quot;&gt;fanta-amazing post&lt;/a&gt; from GoRails. Chris Oliver does a good job in setting up Rails on an EC2 instance. This remains my north star for deployments.&lt;/p&gt;
-
-&lt;p&gt;The only pitfall I faced here was around assets. See… I had created a new rails application to deploy to the server. There were no controllers, no models, nothing. Just a vanilla Rails application. Turns out Capistrano did not feel the need to cmopile assets since it was not needed at the time.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Always have an application you want to deploy before deploying&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;With Rails now deployed on AWS, running on NGINX + Passenger, deployed with Capistrano… I began to think if this is possible on shared servers.&lt;/p&gt;
-
-&lt;h2 id=&quot;updates&quot;&gt;Updates&lt;/h2&gt;
-
-&lt;h3 id=&quot;deploy-keys&quot;&gt;Deploy Keys&lt;/h3&gt;
-
-&lt;p&gt;Github has this neat feature where it allows you to add SSH keys per repository.
-Github calls this “Deploy Keys”. The idea is to give a certain key rights to a
-reposoty so it can pull (by default) contents of that repository. This makes it
-easy for servers to &lt;a href=&quot;https://docs.github.com/en/developers/overview/managing-deploy-keys#deploy-keys&quot;&gt;add their public SSH keys to these repositories as Deploy
-keys&lt;/a&gt; and allow deployment do on smoothly.&lt;/p&gt;
-
-&lt;h3 id=&quot;ssh-forwarding&quot;&gt;SSH Forwarding&lt;/h3&gt;
-
-&lt;p&gt;On AWS, the acceptable way to ues an SSH client to access your server us through
-a PEM file. When deplying using Capistrano, you would have to tell Capistrano to
-use this private key while running your deploys.&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# in config/deploy.rb&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:ssh_options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;ss&quot;&gt;forward_agent: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;ss&quot;&gt;auth_methods: &lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;%w[publickey]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;ss&quot;&gt;keys: &lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;%w[/path/to/key.pem]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-</description>
-        <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
-        <link>https://igbanam.github.io/deploying-rails-to-aws/</link>
-        <guid isPermaLink="true">https://igbanam.github.io/deploying-rails-to-aws/</guid>
-        
-        <category>aws</category>
-        
-        <category>rails</category>
-        
-        <category>journal</category>
         
         
         <category>blog</category>
