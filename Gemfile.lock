@@ -297,7 +297,7 @@ DEPENDENCIES
   jekyll-feed
   jekyll-gist
   jekyll-seo-tag
-  webrick
+  webrick (~> 1.7)
 
 BUNDLED WITH
    2.2.3
