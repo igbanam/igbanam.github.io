@@ -12,7 +12,9 @@
             </a>
         {% else %}
             <span class="link">
-                <img class="selfie" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
+                <figure class="image is-128x128">
+                    <img class="is-rounded" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
+                </figure>
             </span>
         {% endif %}
 
