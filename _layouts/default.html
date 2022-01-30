@@ -33,18 +33,20 @@ layout: compress
 </head>
 <body>
 
-    <div class="wrapper-{% if site.width == "normal" %}normal{% elsif site.width == "large" %}large{% endif %}">
+    <div class="container">
         {% if page.tag %}
             <div class="post">
         {% else %}
             {% if showHeader != true %}
-                <div class="page {{ page.title | downcase }}">
+                <div class="columns page {{ page.title | downcase }}">
             {% else %}
-                <div class="{{ page.title | downcase }}">
+                <div class="columns {{ page.title | downcase }}">
             {% endif %}
         {% endif %}
 
-            {{ content }}
+            <div class="column">
+                {{ content }}
+            </div>
         </div>
     </div>
 
