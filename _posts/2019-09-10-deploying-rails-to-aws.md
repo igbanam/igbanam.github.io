@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deploying Rails to AWS
-author: igbanam
+author: yaasky
 category: blog
 tag:
 - aws

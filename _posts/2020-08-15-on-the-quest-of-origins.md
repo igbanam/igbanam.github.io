@@ -2,7 +2,7 @@
 layout: post
 title: On the Quest of Origins
 date: 2020-08-15 11:34 +0100
-author: igbanam
+author: yaasky
 category: blog
 tag:
   - hr

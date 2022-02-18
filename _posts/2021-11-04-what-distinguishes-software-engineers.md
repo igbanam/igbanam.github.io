@@ -2,7 +2,7 @@
 layout: post
 title: What distinguishes Software Engineers
 date: 2021-11-04 08:28 +0000
-author: igbanam
+author: yaasky
 category: blog
 tag:
   - software
