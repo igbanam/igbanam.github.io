@@ -2,7 +2,7 @@
 layout: post
 title: A Journey into CLI Mail Clients
 date: 2021-10-14 23:38 +0100
-author: igbanam
+author: yaasky
 category: blog
 tag:
   - cli

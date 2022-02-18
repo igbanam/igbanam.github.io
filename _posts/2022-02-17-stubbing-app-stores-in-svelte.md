@@ -2,7 +2,7 @@
 layout: post
 title: Stubbing <span class="code">$app/stores</span> in Svelte Kit
 date: 2022-02-17 12:52 +0000
-author: igbanam
+author: yaasky
 category: blog
 tag:
   - javascript

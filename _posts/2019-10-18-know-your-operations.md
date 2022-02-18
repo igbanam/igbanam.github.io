@@ -2,7 +2,7 @@
 layout: post
 title: Know Your Operations
 date: 2019-10-18 09:51 +0100
-author: igbanam
+author: yaasky
 category: blog
 tag:
   - ruby

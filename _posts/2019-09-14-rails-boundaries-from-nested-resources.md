@@ -2,7 +2,7 @@
 layout: post
 title: Rails Boundaries from Nested Resources
 date: 2019-09-14 23:08 +0100
-author: igbanam
+author: yaasky
 category: blog
 tag:
 - rails

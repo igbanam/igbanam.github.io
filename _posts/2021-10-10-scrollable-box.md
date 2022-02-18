@@ -2,7 +2,7 @@
 layout: post
 title: Scrollable Box
 date: 2021-10-10 20:55 +0100
-author: igbanam
+author: yaasky
 category: blog
 tag:
   - css

@@ -2,15 +2,10 @@
 name: Yāsky
 bio: Poet. Person. Programmer.
 
-# twitter summary info
-description: These are my thoughts.
-
 # if it's an external image, update below for true
 # better with square images
 external-image: true
 picture: https://pbs.twimg.com/profile_images/1279499892793245698/sZVNrM7F_400x400.jpg
-
-url: https://igbanam.github.io
 
 permalink: /:title/
 
@@ -43,7 +38,6 @@ gitlab: igbanam
 linkedin: igbanam
 medium: yaasky
 stackoverflow: 393021/igbanam
-twitter: yaasky
 youtube: channel/UCBd-1N6SsU7X0q9YXO7cERw
 
 authors:
@@ -53,6 +47,7 @@ authors:
         external-image: true
         picture: https://pbs.twimg.com/profile_images/1279499892793245698/sZVNrM7F_400x400.jpg
         twitter: yaasky
+        url: https://igbanam.com
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
@@ -93,3 +88,30 @@ compress_html:
         - stage
 
 exclude: ["travis.sh", "Rakefile", "README.md", "Gemfile", "Gemfile.lock", "FAQ.md"]
+
+# Jekyll SEO tags
+title: Igbanam
+tagline: Poet. Person. Programmer.
+description: Thoughts (and Projects) from the Yāsky Trifecta
+url: https://igbanam.com/
+author: yaasky
+twitter:
+    username: yaasky
+    card: summary
+logo:
+social:
+    name: Yasky
+    links:
+        - https://twitter.com/BenBalter
+webmaster_verifications:
+    google:
+    bing:
+    alexa:
+    yandex:
+    baidu:
+    facebook:
+
+# Jekyll Compose
+jekyll_compose:
+    post_default_front_matter:
+        title:

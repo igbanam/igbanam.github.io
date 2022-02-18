@@ -2,7 +2,7 @@
 layout: post
 title: I left Instagram. Here's why.
 date: 2021-12-01 14:42 +0000
-author: igbanam
+author: yaasky
 category: blog
 tag:
   - social media

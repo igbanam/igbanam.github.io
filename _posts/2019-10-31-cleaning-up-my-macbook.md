@@ -2,7 +2,7 @@
 layout: post
 title: Cleaning up my Macbook
 date: 2019-10-31 12:05 +0100
-author: igbanam
+author: yaasky
 category: blog
 tag:
   - laptop
