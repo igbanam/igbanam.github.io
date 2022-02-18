@@ -3,10 +3,10 @@
   <channel>
     <title>Igbanam</title>
     <description>Thoughts (and Projects) from the Yāsky Trifecta</description>
-    <link>https://igbanam.com//</link>
-    <atom:link href="https://igbanam.com//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Feb 2022 12:42:50 +0000</pubDate>
-    <lastBuildDate>Fri, 18 Feb 2022 12:42:50 +0000</lastBuildDate>
+    <link>https://igbanam.com/</link>
+    <atom:link href="https://igbanam.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 18 Feb 2022 12:57:13 +0000</pubDate>
+    <lastBuildDate>Fri, 18 Feb 2022 12:57:13 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -218,8 +218,8 @@
 
 </description>
         <pubDate>Thu, 17 Feb 2022 12:52:00 +0000</pubDate>
-        <link>https://igbanam.com//stubbing-app-stores-in-svelte/</link>
-        <guid isPermaLink="true">https://igbanam.com//stubbing-app-stores-in-svelte/</guid>
+        <link>https://igbanam.com/stubbing-app-stores-in-svelte/</link>
+        <guid isPermaLink="true">https://igbanam.com/stubbing-app-stores-in-svelte/</guid>
         
         <category>javascript</category>
         
@@ -249,8 +249,8 @@
 &lt;p&gt;It’s the end of me and Facebook’s family of apps; except WhatsApp.&lt;/p&gt;
 </description>
         <pubDate>Wed, 01 Dec 2021 14:42:00 +0000</pubDate>
-        <link>https://igbanam.com//i-left-instagram-here-s-why/</link>
-        <guid isPermaLink="true">https://igbanam.com//i-left-instagram-here-s-why/</guid>
+        <link>https://igbanam.com/i-left-instagram-here-s-why/</link>
+        <guid isPermaLink="true">https://igbanam.com/i-left-instagram-here-s-why/</guid>
         
         <category>social media</category>
         
@@ -311,8 +311,8 @@
 
 </description>
         <pubDate>Thu, 04 Nov 2021 08:28:00 +0000</pubDate>
-        <link>https://igbanam.com//what-distinguishes-software-engineers/</link>
-        <guid isPermaLink="true">https://igbanam.com//what-distinguishes-software-engineers/</guid>
+        <link>https://igbanam.com/what-distinguishes-software-engineers/</link>
+        <guid isPermaLink="true">https://igbanam.com/what-distinguishes-software-engineers/</guid>
         
         <category>software</category>
         
@@ -454,8 +454,8 @@ set certificate_file = &quot;~/.mutt/certificates&quot;
 
 </description>
         <pubDate>Thu, 14 Oct 2021 22:38:00 +0000</pubDate>
-        <link>https://igbanam.com//a-journey-into-cli-mail-clients/</link>
-        <guid isPermaLink="true">https://igbanam.com//a-journey-into-cli-mail-clients/</guid>
+        <link>https://igbanam.com/a-journey-into-cli-mail-clients/</link>
+        <guid isPermaLink="true">https://igbanam.com/a-journey-into-cli-mail-clients/</guid>
         
         <category>cli</category>
         
@@ -498,8 +498,8 @@ set certificate_file = &quot;~/.mutt/certificates&quot;
 
 </description>
         <pubDate>Sun, 10 Oct 2021 19:55:00 +0000</pubDate>
-        <link>https://igbanam.com//scrollable-box/</link>
-        <guid isPermaLink="true">https://igbanam.com//scrollable-box/</guid>
+        <link>https://igbanam.com/scrollable-box/</link>
+        <guid isPermaLink="true">https://igbanam.com/scrollable-box/</guid>
         
         <category>css</category>
         
@@ -546,8 +546,8 @@ set certificate_file = &quot;~/.mutt/certificates&quot;
 
 </description>
         <pubDate>Sat, 15 Aug 2020 10:34:00 +0000</pubDate>
-        <link>https://igbanam.com//on-the-quest-of-origins/</link>
-        <guid isPermaLink="true">https://igbanam.com//on-the-quest-of-origins/</guid>
+        <link>https://igbanam.com/on-the-quest-of-origins/</link>
+        <guid isPermaLink="true">https://igbanam.com/on-the-quest-of-origins/</guid>
         
         <category>hr</category>
         
@@ -644,8 +644,8 @@ du -hd 1 | sort -h
 &lt;p&gt;Cleaning up should not be a one-time thing. It should be a lifestyle.&lt;/p&gt;
 </description>
         <pubDate>Thu, 31 Oct 2019 11:05:00 +0000</pubDate>
-        <link>https://igbanam.com//cleaning-up-my-macbook/</link>
-        <guid isPermaLink="true">https://igbanam.com//cleaning-up-my-macbook/</guid>
+        <link>https://igbanam.com/cleaning-up-my-macbook/</link>
+        <guid isPermaLink="true">https://igbanam.com/cleaning-up-my-macbook/</guid>
         
         <category>laptop</category>
         
@@ -730,8 +730,8 @@ du -hd 1 | sort -h
 &lt;p&gt;There is never a master of presentations. The skill is built over a lifetime. Every new presentation is a chance to learn something new; the audience is unique, the time the presentation is given has its unique properties. When approaching a presentation, even if it is on a topic which you have presented on before, treat it with the same respect and humility as a first time presentation.&lt;/p&gt;
 </description>
         <pubDate>Sun, 20 Oct 2019 22:32:00 +0000</pubDate>
-        <link>https://igbanam.com//presentation-skills/</link>
-        <guid isPermaLink="true">https://igbanam.com//presentation-skills/</guid>
+        <link>https://igbanam.com/presentation-skills/</link>
+        <guid isPermaLink="true">https://igbanam.com/presentation-skills/</guid>
         
         <category>public speaking</category>
         
@@ -841,8 +841,8 @@ Time for a.union b
 
 </description>
         <pubDate>Fri, 18 Oct 2019 08:51:00 +0000</pubDate>
-        <link>https://igbanam.com//know-your-operations/</link>
-        <guid isPermaLink="true">https://igbanam.com//know-your-operations/</guid>
+        <link>https://igbanam.com/know-your-operations/</link>
+        <guid isPermaLink="true">https://igbanam.com/know-your-operations/</guid>
         
         <category>ruby</category>
         
@@ -1028,8 +1028,8 @@ Actions run on specific events in the Github ecosystem. Push and Pull Request ar
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 09 Oct 2019 13:47:00 +0000</pubDate>
-        <link>https://igbanam.com//ci-with-github-actions/</link>
-        <guid isPermaLink="true">https://igbanam.com//ci-with-github-actions/</guid>
+        <link>https://igbanam.com/ci-with-github-actions/</link>
+        <guid isPermaLink="true">https://igbanam.com/ci-with-github-actions/</guid>
         
         <category>ci</category>
         
