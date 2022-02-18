@@ -93,7 +93,7 @@ exclude: ["travis.sh", "Rakefile", "README.md", "Gemfile", "Gemfile.lock", "FAQ.
 title: Igbanam
 tagline: Poet. Person. Programmer.
 description: Thoughts (and Projects) from the Yāsky Trifecta
-url: https://igbanam.com/
+url: https://igbanam.com
 author: yaasky
 twitter:
     username: yaasky
