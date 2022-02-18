@@ -113,5 +113,14 @@ webmaster_verifications:
 
 # Jekyll Compose
 jekyll_compose:
-    post_default_front_matter:
-        title:
+    default_front_matter:
+        posts:
+            author: yaasky
+            category: blog
+            layout: post
+            title:
+            description:
+            image:
+            locale: en-GB
+            tag:
+                - 
