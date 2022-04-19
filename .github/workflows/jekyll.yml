@@ -13,5 +13,7 @@ jobs:
         with:
           ref: release
           fetch-depth: 1
+      - name: 👨🏾‍🔧Fix the permissions issue
+        run: git config --global --add safe.directory /github/workspace
       - name: 🧪 Build and deploy
         uses: victoriadrake/jekyll-cd@master
