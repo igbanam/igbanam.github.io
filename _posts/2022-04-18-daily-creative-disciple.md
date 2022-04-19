@@ -10,6 +10,7 @@ locale: en-GB
 tag:
   - writing
   - challenges
+  - daily-creative-disciple
 ---
 
 > Well first geeky thing I learned from this is that to put the `#` symbol in the metadata part of the markdown file, you have to escape it with the `&` escape code. Who would have thunk it?
