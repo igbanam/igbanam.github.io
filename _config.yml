@@ -82,6 +82,9 @@ compress_html:
 
 exclude: ["travis.sh", "Rakefile", "README.md", "Gemfile", "Gemfile.lock", "FAQ.md"]
 
+plugins:
+    - postcss
+
 # Jekyll SEO tags
 title: Igbanam
 tagline: Poet. Person. Programmer.
@@ -96,13 +99,6 @@ social:
     name: Yasky
     links:
         - https://twitter.com/BenBalter
-webmaster_verifications:
-    google:
-    bing:
-    alexa:
-    yandex:
-    baidu:
-    facebook:
 
 # Jekyll Compose
 jekyll_compose:
@@ -117,3 +113,6 @@ jekyll_compose:
             locale: en-GB
             tag:
                 - 
+
+postcss:
+    cache: false
