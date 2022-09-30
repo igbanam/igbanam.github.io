@@ -1,20 +1,16 @@
 # main text of home
 name: Yāsky
-bio: Poet. Person. Programmer.
+bio: |
+    Poet.
+    Person.
+    Programmer.
 
 # if it's an external image, update below for true
 # better with square images
-external-image: true
-picture: https://pbs.twimg.com/profile_images/1546434206829510656/S5AZnVcD_400x400.jpg
+external-image: false
+picture: assets/images/profile.jpeg
 
 permalink: /:title/
-
-# To enable google analytics, supply your token below
-# analytics-google: 'UA-MYANALYTICS'
-
-# To enable piwik tracking, supply your url & site ID below
-# analytics-piwik-url: 'piwik.my-host.com'
-# analytics-piwik-id: 1
 
 # if you don't want comments in your posts, leave categories empty
 disqus:
