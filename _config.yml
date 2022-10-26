@@ -83,7 +83,14 @@ compress_html:
         - development
         - stage
 
-exclude: ["travis.sh", "Rakefile", "README.md", "Gemfile", "Gemfile.lock", "FAQ.md"]
+exclude:
+    - FAQ.md
+    - Gemfile
+    - Gemfile.lock
+    - README.md
+    - Rakefile
+    - travis.sh
+    - vendor
 
 # Jekyll SEO tags
 title: Igbanam
