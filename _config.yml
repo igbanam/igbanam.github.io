@@ -39,7 +39,7 @@ youtube: channel/UCBd-1N6SsU7X0q9YXO7cERw
 authors:
     igbanam:
         name: Igbanam
-        bio: Poet. Person. Programmer.
+        bio: Poet. Person. Programmer. Particular.
         external-image: true
         picture: https://pbs.twimg.com/profile_images/1279499892793245698/sZVNrM7F_400x400.jpg
         twitter: yaasky
@@ -94,7 +94,7 @@ exclude:
 
 # Jekyll SEO tags
 title: Igbanam
-tagline: Poet. Person. Programmer.
+tagline: Poet. Person. Programmer. Particular.
 description: Thoughts (and Projects) from the Yāsky Trifecta
 url: https://igbanam.com
 author: yaasky
