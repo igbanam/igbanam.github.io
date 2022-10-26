@@ -1,19 +1,18 @@
 name: Jekyll site CI
 
-on: [push]
+on:
+  - push
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - name: 🛎  Check out release
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3
+      - name: ❤️   Ruby Version
+        uses: ruby/setup-ruby@v1
         with:
-          ref: release
-          fetch-depth: 1
-      - name: 👨🏾‍🔧Fix the permissions issue
-        run: git config --global --add safe.directory /github/workspace
-      - name: 🧪 Build and deploy
-        uses: victoriadrake/jekyll-cd@master
+          ruby-version: '3.0.3'
+          bundler-cache: true
+      - name: 🔨  Build Site
+        run: bundle exec jekyll build
