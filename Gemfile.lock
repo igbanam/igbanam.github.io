@@ -273,6 +273,7 @@ DEPENDENCIES
   jekyll-compose
   jekyll-feed
   jekyll-gist
+  jekyll-paginate
   jekyll-seo-tag
   webrick (~> 1.7)
 
