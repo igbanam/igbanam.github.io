@@ -9,9 +9,9 @@ paginate: 4
 # paginate_path: "recent/page:num/"
 
 compress_html:
-    clippings: all
-    ignore:
-        envs: development
+  clippings: all
+  ignore:
+    envs: development
 
 include:
   - .htaccess
@@ -26,12 +26,12 @@ title: Igbanam
 description: Hard thoughts on software
 url: https://igbanam.com
 twitter:
-    username: yaasky
-    card: summary
+  username: yaasky
+  card: summary
 social:
-    name: Yasky
-    links:
-        - https://twitter.com/yaasky
+  name: Yasky
+  links:
+    - https://twitter.com/yaasky
 
 # Minimal Mistakes Configuration
 # minimal_mistakes_skin: air
@@ -56,10 +56,10 @@ jekyll-archives:
     category: /categories/:name/
     tag: /tags/:name/
 words_per_minute: 200
-# collections:
-#   portfolio:
-#     output: true
-#     permalink: /:collection/:path/
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:path/
 comments:
   provider: giscus
   giscus:
@@ -70,144 +70,140 @@ comments:
     reactions_enabled    : 1
     theme                : light
 author:
-    name: Yāsky
-    avatar: /assets/images/profile.jpeg
-    bio: |+
-        Port.
-        Person.
-        Programmer.
-        Particular.
-    location: Online
-    email:
-    links:
-        - label: "Email"
-          icon: "fas fa-fw fa-envelope-square"
-          # url: "mailto:some@email.com"
-        - label: "Website"
-          icon: "fas fa-fw fa-link"
-          url: https://igbanam.com
-        - label: "Twitter"
-          icon: "fab fa-fw fa-twitter-square"
-          url: https://twitter.com/yaasky
-        - label: "Facebook"
-          icon: "fab fa-fw fa-facebook-square"
-          # url: https://igbanam.com
-        - label: "GitHub"
-          icon: "fab fa-fw fa-github"
-          url: https://github.com/igbanam
-        - label: "Instagram"
-          icon: "fab fa-fw fa-instagram"
-          # url: https://igbanam.com
-        - label: StackOverflow
-          icon: "fab fa-fw fa-stack-overflow"
-          url: https://stackoverflow.com/users/393021/igbanam
-        - label: LinkedIn
-          icon: "fab fa-fw fa-linkedin"
-          url: https://linkedin.com/in/igbanam
+  name: Yāsky
+  avatar: /assets/images/profile.jpeg
+  bio: |+
+    Port.
+    Person.
+    Programmer.
+    Particular.
+  location: Online
+  email:
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      # url: "mailto:some@email.com"
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: https://igbanam.com
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: https://twitter.com/yaasky
+    - label: "Facebook"
+      icon: "fab fa-fw fa-facebook-square"
+      # url: https://igbanam.com
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: https://github.com/igbanam
+    - label: "Instagram"
+      icon: "fab fa-fw fa-instagram"
+      # url: https://igbanam.com
+    - label: StackOverflow
+      icon: "fab fa-fw fa-stack-overflow"
+      url: https://stackoverflow.com/users/393021/igbanam
+    - label: LinkedIn
+      icon: "fab fa-fw fa-linkedin"
+      url: https://linkedin.com/in/igbanam
 defaults:
   # _portfolio
-    - scope:
-        path: ""
-        type: portfolio
-      values:
-        layout: single
-        author_profile: false
-        share: true
-    # _category
-    - scope:
-        path: ""
-        type: category
-      values:
-        comments: false
-    # _pages
-    - scope:
-        path: ""
-        type: pages
-      values:
-        layout: single
-    # _posts
-    - scope:
-        path: ""
-        type: projects
-      values:
-        layout: single
-        author_profile: true
-        share: true
-    - scope:
-        path: ""
-        type: posts
-      values:
-        layout: single
-        author_profile: true
-        read_time: true
-        comments: true
-        share: true
-        related: true
-        show_date: true
-    # _tags
-    - scope:
-        path: ""
-        type: tag
-      values:
-        author_profile: true
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: false
+      share: true
+  # _category
+  - scope:
+      path: ""
+      type: category
+    values:
+      comments: false
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+  # _posts
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: single
+      author_profile: true
+      share: true
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      show_date: true
+  # _tags
+  - scope:
+      path: ""
+      type: tag
+    values:
+      author_profile: true
 footer:
-    links:
-        - label: Email
-          icon: fas fa-fw fa-envelope-square
-          # url: mailto:some@email.com
-        - label: Website
-          icon: fas fa-fw fa-link
-          url: https://igbanam.com
-        - label: Twitter
-          icon: fab fa-fw fa-twitter-square
-          # url: https://twitter.com/yaasky
-        - label: Facebook
-          icon: fab fa-fw fa-facebook-square
-          # url: https://igbanam.com
-        - label: GitHub
-          icon: fab fa-fw fa-github
-          url: https://github.com/igbanam/igbanam
-        - label: Instagram
-          icon: fab fa-fw fa-instagram
-          # url: https://igbanam.com
+  links:
+    - label: Email
+      icon: fas fa-fw fa-envelope-square
+      # url: mailto:some@email.com
+    - label: Website
+      icon: fas fa-fw fa-link
+      url: https://igbanam.com
+    - label: Twitter
+      icon: fab fa-fw fa-twitter-square
+      # url: https://twitter.com/yaasky
+    - label: Facebook
+      icon: fab fa-fw fa-facebook-square
+      # url: https://igbanam.com
+    - label: GitHub
+      icon: fab fa-fw fa-github
+      url: https://github.com/igbanam/igbanam
+    - label: Instagram
+      icon: fab fa-fw fa-instagram
+      # url: https://igbanam.com
 og_image: /assets/images/profile.jpeg
 search: true
 search_full_content: true
 search_provider: lunr
 lunr:
-    search_within_pages: true
+  search_within_pages: true
 social:
-    type: Person
-    name: Igbanam
-    links:
-        - https://twitter.com/yaasky
-        - https://github.com/igbanam
+  type: Person
+  name: Igbanam
+  links:
+    - https://twitter.com/yaasky
+    - https://github.com/igbanam
 categories:
-    type: jekyll-archives
-    path: /categories/
+  type: jekyll-archives
+  path: /categories/
 tags:
-    type: jekyll-archives
-    path: /tags/
-category_archive:
-    type: jekyll-archives
-    path: /categories/
-tag_archive:
-    type: jekyll-archives
-    path: /tags/
+  type: jekyll-archives
+  path: /tags/
 # Plugins (previously gems:)
 plugins:
+  - jekyll-archives
+  - jekyll-feed
+  - jekyll-gist
+  - jekyll-include-cache
   - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jekyll-archives
-  - jekyll-include-cache
+  - jekyll-twitter-plugin
 
 # mimic GitHub Pages with --safe
 whitelist:
-  - jekyll-paginate
   - jekyll-archives
-  - jekyll-sitemap
-  - jekyll-gist
   - jekyll-feed
+  - jekyll-gist
   - jekyll-include-cache
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-twitter-plugin
