@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: C.I. with Github Actions
 date: 2019-10-09 14:47 +0100
 author: yaasky

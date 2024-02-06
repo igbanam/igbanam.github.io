@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Deploying Rails to AWS
 author: yaasky
 category: blog

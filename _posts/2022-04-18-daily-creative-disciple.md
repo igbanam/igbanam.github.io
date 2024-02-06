@@ -1,16 +1,17 @@
 ---
-layout: post
+layout: single
 title: The &#35;DailyCreativeDisciple challenge
 date: 2022-04-18 23:02 +0100
 author: yaasky
-category: blog
+categories:
+    - learning
 description: A challenge to create consistency in the creative arts
 image:
 locale: en-GB
-tag:
-  - writing
-  - challenges
-  - daily-creative-disciple
+tags:
+    - writing
+    - challenges
+    - daily-creative-disciple
 ---
 
 > Well first geeky thing I learned from this is that to put the `#` symbol in the metadata part of the markdown file, you have to escape it with the `&` escape code. Who would have thunk it?

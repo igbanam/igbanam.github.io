@@ -1,129 +1,213 @@
 # main text of home
-name: Yāsky
-bio: |
-    Poet.
-    Person.
-    Programmer.
+name: Igbanam
 
-# if it's an external image, update below for true
-# better with square images
-external-image: false
-picture: assets/images/profile.jpeg
-
-permalink: /:title/
-
-# if you don't want comments in your posts, leave categories empty
-disqus:
-  shortname: igbanam
-  categories: []
-
-# if you don't have any of social below, comment the line
-# email: email@host.com
-# facebook: igbanam
-# google: mygoogle
-# instagram: yaasky
-# lanyrd: mylanyrd
-# lastfm: mylastfm
-# pinterest: mypinterest
-# quora: userquora
-# reddit: username
-# spotify: myspotify
-# vimeo: myvimeo
-github: igbanam
-gitlab: igbanam
-linkedin: igbanam
-medium: yaasky
-stackoverflow: 393021/igbanam
-youtube: "@yaskygaming"
-
-authors:
-    igbanam:
-        name: Igbanam
-        bio: Poet. Person. Programmer. Particular.
-        external-image: true
-        picture: https://pbs.twimg.com/profile_images/1279499892793245698/sZVNrM7F_400x400.jpg
-        twitter: yaasky
-        url: https://igbanam.com
-
-# do you want a larger site? change the option below
-# options: [normal, large] | default: normal
-# normal = 560px / large = 810px
-width: large
+# remote_theme: "mmistakes/minimal-mistakes"
+theme: minimal-mistakes-jekyll
 
 # if you don't need pagination, comment the *paginate* configs below
 paginate: 4
-paginate_path: "blog/:num/"
-
-# if you don't want a particular section, set it to false
-projects: true
-about: true
-blog: true
-
-# do you want to show the "read time" of the posts?
-read-time: true
-
-# do you want to show the "tags" inside the posts?
-show-tags: true
-
-# related posts inside a post?
-related: true
-
-# Display links for next and previous posts for the specified categories
-post-advance-links: [blog]
-
-# show author block at the end of a post ?
-show-author: true
-
-# do you want some animations?
-animation: true
+# paginate_path: "recent/page:num/"
 
 compress_html:
+    clippings: all
     ignore:
-        envs:
-        - development
-        - stage
+        envs: development
 
+include:
+  - .htaccess
+  - _pages
 exclude:
-    - FAQ.md
-    - Gemfile
-    - Gemfile.lock
-    - README.md
-    - Rakefile
-    - travis.sh
-    - vendor
+  - Gemfile
+  - Gemfile.lock
+  - README.md
 
 # Jekyll SEO tags
 title: Igbanam
-tagline: Poet. Person. Programmer. Particular.
-description: Thoughts (and Projects) from the Yāsky Trifecta
+description: Hard thoughts on software
 url: https://igbanam.com
-author: yaasky
 twitter:
     username: yaasky
     card: summary
-logo:
 social:
     name: Yasky
     links:
-        - https://twitter.com/BenBalter
-webmaster_verifications:
-    google:
-    bing:
-    alexa:
-    yandex:
-    baidu:
-    facebook:
+        - https://twitter.com/yaasky
 
-# Jekyll Compose
-jekyll_compose:
-    default_front_matter:
-        posts:
-            author: yaasky
-            category: blog
-            layout: post
-            title:
-            description:
-            image:
-            locale: en-GB
-            tag:
-                - 
+# Minimal Mistakes Configuration
+# minimal_mistakes_skin: air
+locale: en
+title_separator: "•"
+subtitle: Hard thoughts on software
+name: Yāsky
+baseUrl:
+repository: igbanam/igbanam.github.io
+breadcrumbs: true
+teaser:
+logo:
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+    - year
+  layouts:
+    category: archive-taxonomy
+    tag: archive-taxonomy
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
+words_per_minute: 200
+# collections:
+#   portfolio:
+#     output: true
+#     permalink: /:collection/:path/
+comments:
+  provider: giscus
+  giscus:
+    repo_id              : MDEwOlJlcG9zaXRvcnk1Mzk1NDE1OA==
+    category_name        : Comments
+    category_id          : DIC_kwDOAzdGbs4Ccjjj
+    discussion_term      : pathname
+    reactions_enabled    : 1
+    theme                : light
+author:
+    name: Yāsky
+    avatar: /assets/images/profile.jpeg
+    bio: |+
+        Port.
+        Person.
+        Programmer.
+        Particular.
+    location: Online
+    email:
+    links:
+        - label: "Email"
+          icon: "fas fa-fw fa-envelope-square"
+          # url: "mailto:some@email.com"
+        - label: "Website"
+          icon: "fas fa-fw fa-link"
+          url: https://igbanam.com
+        - label: "Twitter"
+          icon: "fab fa-fw fa-twitter-square"
+          url: https://twitter.com/yaasky
+        - label: "Facebook"
+          icon: "fab fa-fw fa-facebook-square"
+          # url: https://igbanam.com
+        - label: "GitHub"
+          icon: "fab fa-fw fa-github"
+          url: https://github.com/igbanam
+        - label: "Instagram"
+          icon: "fab fa-fw fa-instagram"
+          # url: https://igbanam.com
+        - label: StackOverflow
+          icon: "fab fa-fw fa-stack-overflow"
+          url: https://stackoverflow.com/users/393021/igbanam
+        - label: LinkedIn
+          icon: "fab fa-fw fa-linkedin"
+          url: https://linkedin.com/in/igbanam
+defaults:
+  # _portfolio
+    - scope:
+        path: ""
+        type: portfolio
+      values:
+        layout: single
+        author_profile: false
+        share: true
+    # _category
+    - scope:
+        path: ""
+        type: category
+      values:
+        comments: false
+    # _pages
+    - scope:
+        path: ""
+        type: pages
+      values:
+        layout: single
+    # _posts
+    - scope:
+        path: ""
+        type: projects
+      values:
+        layout: single
+        author_profile: true
+        share: true
+    - scope:
+        path: ""
+        type: posts
+      values:
+        layout: single
+        author_profile: true
+        read_time: true
+        comments: true
+        share: true
+        related: true
+        show_date: true
+    # _tags
+    - scope:
+        path: ""
+        type: tag
+      values:
+        author_profile: true
+footer:
+    links:
+        - label: Email
+          icon: fas fa-fw fa-envelope-square
+          # url: mailto:some@email.com
+        - label: Website
+          icon: fas fa-fw fa-link
+          url: https://igbanam.com
+        - label: Twitter
+          icon: fab fa-fw fa-twitter-square
+          # url: https://twitter.com/yaasky
+        - label: Facebook
+          icon: fab fa-fw fa-facebook-square
+          # url: https://igbanam.com
+        - label: GitHub
+          icon: fab fa-fw fa-github
+          url: https://github.com/igbanam/igbanam
+        - label: Instagram
+          icon: fab fa-fw fa-instagram
+          # url: https://igbanam.com
+og_image: /assets/images/profile.jpeg
+search: true
+search_full_content: true
+search_provider: lunr
+lunr:
+    search_within_pages: true
+social:
+    type: Person
+    name: Igbanam
+    links:
+        - https://twitter.com/yaasky
+        - https://github.com/igbanam
+categories:
+    type: jekyll-archives
+    path: /categories/
+tags:
+    type: jekyll-archives
+    path: /tags/
+category_archive:
+    type: jekyll-archives
+    path: /categories/
+tag_archive:
+    type: jekyll-archives
+    path: /tags/
+# Plugins (previously gems:)
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-archives
+  - jekyll-include-cache
+
+# mimic GitHub Pages with --safe
+whitelist:
+  - jekyll-paginate
+  - jekyll-archives
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache

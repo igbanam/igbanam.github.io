@@ -3,14 +3,18 @@ source "https://rubygems.org"
 ruby '3.0.3'
 
 gem "github-pages"
+gem "jekyll"
+gem "minimal-mistakes-jekyll"
 
 group :jekyll_plugins do
-  gem "jekyll-compose"
+  gem "jekyll-archives"
   gem "jekyll-asciinema"
-  gem "jekyll-gist"
   gem "jekyll-feed"
-  gem "jekyll-seo-tag"
+  gem "jekyll-gist"
+  gem "jekyll-include-cache"
   gem "jekyll-paginate"
+  gem "jekyll-seo-tag"
+  gem "jekyll-sitemap"
 end
 
 gem "webrick", "~> 1.7"

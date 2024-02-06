@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: What distinguishes Software Engineers
 date: 2021-11-04 08:28 +0000
 author: yaasky
