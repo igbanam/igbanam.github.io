@@ -34,7 +34,7 @@ social:
     - https://twitter.com/yaasky
 
 # Minimal Mistakes Configuration
-# minimal_mistakes_skin: air
+minimal_mistakes_skin: neon
 locale: en
 title_separator: "•"
 subtitle: Hard thoughts on software
