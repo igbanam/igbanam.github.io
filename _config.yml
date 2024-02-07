@@ -1,7 +1,7 @@
 # main text of home
 name: Igbanam
 
-# remote_theme: "mmistakes/minimal-mistakes"
+remote_theme: "mmistakes/minimal-mistakes"
 theme: minimal-mistakes-jekyll
 
 # if you don't need pagination, comment the *paginate* configs below
@@ -196,6 +196,7 @@ plugins:
   - jekyll-gist
   - jekyll-include-cache
   - jekyll-paginate
+  - jekyll-remote-theme
   - jekyll-sitemap
   - jekyll-twitter-plugin
 
