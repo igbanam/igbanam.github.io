@@ -69,7 +69,7 @@ comments:
     category_id          : DIC_kwDOAzdGbs4Ccjjj
     discussion_term      : pathname
     reactions_enabled    : 1
-    theme                : light
+    theme                : transparent_dark
 author:
   name: Yāsky
   avatar: /assets/images/profile.jpeg
