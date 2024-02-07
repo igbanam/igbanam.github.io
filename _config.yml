@@ -2,7 +2,7 @@
 name: Igbanam
 
 remote_theme: "mmistakes/minimal-mistakes"
-theme: minimal-mistakes-jekyll
+# theme: minimal-mistakes-jekyll
 
 # if you don't need pagination, comment the *paginate* configs below
 paginate: 4

@@ -4,7 +4,7 @@ ruby '3.0.3'
 
 gem "github-pages"
 gem "jekyll"
-gem "minimal-mistakes-jekyll"
+# gem "minimal-mistakes-jekyll"
 
 group :jekyll_plugins do
   gem "jekyll-archives"
