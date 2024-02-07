@@ -1,14 +1,15 @@
 ---
-layout: post
+layout: single
 title: Trying out MRSK
 date: 2023-03-24 15:32 +0000
 author: yaasky
-category: blog
+categories:
+    - tooling
 description:
 image:
 locale: en-GB
-tag:
--
+tags:
+    - deployment
 ---
 
 MRSK is this new deployment tool planned to be baked into Rails. The goal is to allow app developers select the best cloud provider that fits their use case, and avoid vendor lock-in. If you've ever felt the dread of "Our cloud costs have gotten expensive, but switching is so much work. So let's take on multiple projects to save-costs™.", you will enjoy MRSK. MRSK finally answers the age old question, "You say the application is running in the cloud. What happens if it rains?"

@@ -1,6 +1,35 @@
 ---
-layout: page
-title: Home
-author: yaasky
-image: /assets/images/logo.png
+layout: splash
+header:
+  overlay_color: "#3d85c6"
+  overlay_image: /assets/images/mike-kenneally-TD4DBagg2wE-unsplash.jpg
+  actions:
+    - label: About
+      url: /about
+excerpt: >
+    Hard thoughts on software.
+feature_row:
+  - image_path: /assets/images/shrinath-2Y3AhqTIqNo-unsplash.jpg
+    alt: "Unsplash image from Shrinath"
+    title: "Project Ideas"
+    excerpt: "All the projects I've attempted: complete, and incomplete."
+    url: "/projects"
+    btn_label: "Get inspired"
+    btn_class: "btn--primary"
+  - image_path: /assets/images/shambhavi-singh-Ww_qIN5JodU-unsplash.jpg
+    alt: "Unsplash image by Shambhavi Singh"
+    title: "Tech Musings"
+    excerpt: "General thoughts on the software practice. Hot takes, unpopular opinions."
+    url: "/blog"
+    btn_label: "Learn more"
+    btn_class: "btn--primary"
+  - image_path: /assets/images/sumaid-pal-singh-bakshi-x7dnSyIG-Q4-unsplash.jpg
+    alt: "Unsplash image by Sumaid pal Singh Bakshi"
+    title: "Book Reviews"
+    excerpt: "Here's where you read about what I think I read."
+    url: "/book-reviews"
+    btn_class: "btn--primary"
+    btn_label: "Peek in"
 ---
+
+{% include feature_row %}

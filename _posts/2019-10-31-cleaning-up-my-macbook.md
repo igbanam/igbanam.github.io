@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Cleaning up my Macbook
 date: 2019-10-31 12:05 +0100
 author: yaasky

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: On the Quest of Origins
 date: 2020-08-15 11:34 +0100
 author: yaasky

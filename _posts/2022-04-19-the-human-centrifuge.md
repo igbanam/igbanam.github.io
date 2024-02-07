@@ -1,13 +1,14 @@
 ---
-layout: post
+layout: single
 title:
 date: 2022-04-19 00:58 +0100
 author: yaasky
-category: blog
+categories:
+    - thoughts
 description:
 image:
 locale: en-GB
-tag:
+tags:
   - humanity
   - podcast-digest
   - discussion

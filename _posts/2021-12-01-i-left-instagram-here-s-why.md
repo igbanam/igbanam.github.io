@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: I left Instagram. Here's why.
 date: 2021-12-01 14:42 +0000
 author: yaasky

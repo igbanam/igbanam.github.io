@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Rails Boundaries from Nested Resources
 date: 2019-09-14 23:08 +0100
 author: yaasky

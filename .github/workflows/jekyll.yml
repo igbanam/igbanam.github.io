@@ -14,5 +14,7 @@ jobs:
         with:
           ruby-version: '3.0.3'
           bundler-cache: true
+      - name: 📦 Gather dependencies
+        run: bundle
       - name: 🔨  Build Site
         run: bundle exec jekyll build

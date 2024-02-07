@@ -1,15 +1,16 @@
 ---
-layout: post
+layout: single
 title: Stubbing <span class="code">$app/stores</span> in Svelte Kit
 date: 2022-02-17 12:52 +0000
 author: yaasky
-category: blog
-tag:
-  - javascript
-  - svelte
-  - testing
-  - mocks
-  - stubs
+categories:
+    - tooling
+tags:
+    - javascript
+    - svelte
+    - testing
+    - mocks
+    - stubs
 ---
 
 # What is Svelte Kit?

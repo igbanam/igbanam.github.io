@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Presentation Skills
 date: 2019-10-20 23:32 +0100
 author: yaasky
