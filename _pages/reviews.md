@@ -1,6 +1,11 @@
 ---
+layout: collection
 title: Book Reviews
-permalink: /book-reviews
+permalink: /reviews
+collection: reviews
+author_profile: true
+entries_layout: grid
+classes: wide
 ---
 
 <div align="center">

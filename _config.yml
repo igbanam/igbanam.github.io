@@ -58,6 +58,9 @@ jekyll-archives:
     tag: /tags/:name/
 words_per_minute: 200
 collections:
+  reviews:
+    output: true
+    permalink: /:collection/:path/
   projects:
     output: true
     permalink: /:collection/:path/
