@@ -260,7 +260,7 @@ GEM
     unf_ext (0.0.8.2)
     unf_ext (0.0.8.2-x86-mingw32)
     unicode-display_width (1.8.0)
-    webrick (1.7.0)
+    webrick (1.8.2)
     zeitwerk (2.6.17)
 
 PLATFORMS
@@ -280,7 +280,7 @@ DEPENDENCIES
   jekyll-seo-tag
   jekyll-sitemap
   jekyll-twitter-plugin
-  webrick (~> 1.7)
+  webrick (~> 1.8)
 
 RUBY VERSION
    ruby 3.0.3p157
