@@ -123,7 +123,7 @@ DEPENDENCIES
   jekyll-seo-tag
   jekyll-sitemap
   jekyll-twitter-plugin
-  webrick (~> 1.8)
+  webrick (~> 1.9)
 
 RUBY VERSION
    ruby 3.2.7p253
