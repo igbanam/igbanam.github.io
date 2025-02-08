@@ -1,10 +1,8 @@
 source "https://rubygems.org"
 
-ruby '3.0.3'
+ruby '3.2.7'
 
-gem "github-pages"
-gem "jekyll"
-# gem "minimal-mistakes-jekyll"
+gem "jekyll", "~> 4"
 
 group :jekyll_plugins do
   gem "jekyll-archives"
@@ -19,4 +17,4 @@ group :jekyll_plugins do
   gem "jekyll-twitter-plugin"
 end
 
-gem "webrick", "~> 1.8"
+gem "webrick", "~> 1.9"
