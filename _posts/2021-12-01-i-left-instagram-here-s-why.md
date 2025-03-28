@@ -8,7 +8,7 @@ tag:
   - social media
 ---
 
-I left cos Instagram turned on my camera multiple times while I was scrolling through the timeline. This happened during the morning of October 30. The only way I could catch this was cos the recently released Android 12 on the Pixel 5 has an indicator when an up is accessing you camera or your microphone — I was on the beta release at this time. I chance-saw this blink on twice while scrolling Instagram's timeline. I then checked the Privacy Dashboard — another feature in this new release — and I saw Instagram accessed the camera momentarily a couple of times. These are the facts.
+I left cos Instagram turned on my camera multiple times while I was scrolling through the timeline. This happened during the morning of October 30. The only way I could catch this was cos the recently released Android 12 on the Pixel 5 has an indicator when an app is accessing you camera or your microphone — I was on the beta release at this time. I chance-saw this blink on twice while scrolling Instagram's timeline. I then checked the Privacy Dashboard — another feature in this new release — and I saw Instagram accessed the camera momentarily a couple of times. These are the facts.
 
 Now, the inferences. I couldn't help but wonder why the camera should turn on when I didn't explicitly ask that from the app. I couldn't help but think Instagram takes photos of people scrolling timeline. This suspicion fed into the myth for ads placement. That feeling that Instagram listens. Often exacerbated with ads popping up in timeline when you talk about something with your friends in the presence of your phone — just to site one scenario. These are my inferences.
 
