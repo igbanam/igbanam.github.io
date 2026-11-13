@@ -87,6 +87,30 @@ export function excerptFromBody(body: string, maxLen = 160): string {
   return plain.slice(0, maxLen).trimEnd() + "…";
 }
 
+export function decodeEntities(s: string): string {
+  return s.replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+          .replace(/&#x([0-9a-fA-F]+);/g, (_, h) => String.fromCharCode(parseInt(h, 16)))
+          .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+}
+export function sanitizeTitleHtml(s: string): string {
+  const decoded = decodeEntities(s);
+  return decoded.replace(/<(\/?)([a-zA-Z0-9]+)([^>]*)>/g, (m, slash, tag, attrs) => {
+    const t = tag.toLowerCase();
+    if (["span", "code", "em", "strong"].includes(t)) {
+      if (slash) return `</${t}>`;
+      if (t === "span") {
+        const cls = (attrs as string).match(/\bclass\s*=\s*["']([^"']*)["']/);
+        return cls ? `<span class="${cls[1]}">` : "<span>";
+      }
+      return `<${t}>`;
+    }
+    return "";
+  });
+}
+export function plainTitle(s: string): string {
+  return decodeEntities(s).replace(/<[^>]*>/g, "");
+}
+
 /** Deterministic hash from string → array of ints for generative art */
 export function seedInts(seed: string, count = 5): number[] {
   let h = 0;

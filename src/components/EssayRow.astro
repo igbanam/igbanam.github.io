@@ -9,7 +9,9 @@ interface Props {
   spiciness?: string;
   seed: string;
 }
-const { href, date, readingTime: rt, title, description, categories = [], spiciness, seed } = Astro.props;
+import { sanitizeTitleHtml } from "../utils/slug";
+const { href, date, readingTime: rt, title: rawTitle, description, categories = [], spiciness, seed } = Astro.props;
+const title = rawTitle;
 ---
 
 <article class="essay-row">
@@ -25,7 +27,7 @@ const { href, date, readingTime: rt, title, description, categories = [], spicin
     )}
   </div>
   <h3 class="essay-row__title font-display">
-    <a href={href}>{title || "Untitled"}</a>
+    <a href={href} set:html={sanitizeTitleHtml(title || "Untitled")}></a>
   </h3>
   {description && <p class="essay-row__dek">{description}</p>}
   <div class="essay-row__foot">
@@ -62,6 +64,12 @@ const { href, date, readingTime: rt, title, description, categories = [], spicin
   }
   .essay-row__title a:hover {
     text-decoration: underline; text-decoration-color: var(--proof); text-decoration-thickness: 3px; text-underline-offset: 4px;
+  }
+  .essay-row__title :global(.code) {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.75em; font-weight: 500;
+    background: var(--paper-raised); border: 1px solid var(--rule);
+    padding: 0.06em 0.3em; border-radius: 3px; white-space: nowrap;
   }
   .essay-row__dek {
     margin-top: 8px; color: var(--ink-muted); font-size: 0.95rem; line-height: 1.6;

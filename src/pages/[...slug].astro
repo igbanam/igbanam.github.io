@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Base from "../layouts/Base.astro";
-import { postUrl, slugFromFilename, dateFromFilename, normalizeTags, normalizeCategories, readingTime, formatDate, excerptFromBody } from "../utils/slug";
+import { postUrl, slugFromFilename, dateFromFilename, normalizeTags, normalizeCategories, readingTime, formatDate, excerptFromBody, sanitizeTitleHtml, plainTitle } from "../utils/slug";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -27,7 +27,9 @@ const cats = normalizeCategories(post.data);
 const tags = normalizeTags(post.data);
 const body = post.body ?? "";
 const rt = readingTime(body);
-const title = post.data.title || slugFromFilename(post.id) || "Untitled";
+const rawTitle = post.data.title || slugFromFilename(post.id) || "Untitled";
+const titleHtml = sanitizeTitleHtml(rawTitle);
+const titleText = plainTitle(rawTitle);
 const description = post.data.description || post.data.excerpt || excerptFromBody(body);
 
 // Related: build-time ranking per §6 spec
@@ -57,11 +59,11 @@ const siteUrl = Astro.site?.toString() ?? "https://igbanam.com/";
 const canon = new URL(postUrl(post), siteUrl).toString();
 ---
 
-<Base title={title} description={description} canonical={canon} current="/blog/">
+<Base title={titleText} description={description} canonical={canon} current="/blog/">
   <!-- Reading progress -->
   <div class="progress" aria-hidden="true"><div class="progress__bar" id="progress-bar"></div></div>
 
-  <article class="article canvas">
+  <article class="article">
     <!-- Eyebrow -->
     <div class="article__eyebrow font-mono">
       {cats.length > 0 ? <a href={`/categories/#${encodeURIComponent(cats[0])}`}>{cats[0]}</a> : <span>Essay</span>}
@@ -71,7 +73,7 @@ const canon = new URL(postUrl(post), siteUrl).toString();
       <span>{rt} min</span>
     </div>
 
-    <h1 class="article__title font-display">{title}</h1>
+    <h1 class="article__title font-display" set:html={titleHtml}></h1>
     {description && <p class="article__dek">{description}</p>}
     {post.data.stance && <p class="article__stance font-mono"><strong>Position:</strong> {post.data.stance}</p>}
 
@@ -128,7 +130,7 @@ const canon = new URL(postUrl(post), siteUrl).toString();
               : rcats.length ? `Also about ${rcats[0]}` : "From the archive";
             return (
               <li>
-                <a href={postUrl(r)} class="related__link">{r.data.title || slugFromFilename(r.id)}</a>
+                <a href={postUrl(r)} class="related__link" set:html={sanitizeTitleHtml(r.data.title || slugFromFilename(r.id))}></a>
                 <span class="related__reason font-mono">{reason}</span>
               </li>
             );
@@ -146,7 +148,12 @@ const canon = new URL(postUrl(post), siteUrl).toString();
       .progress__bar { animation: progress linear forwards; animation-timeline: scroll(root); }
       @keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
     }
-    .article { padding: var(--s-8) 0 var(--s-12); }
+    .article {
+      padding: var(--s-8) 0 var(--s-12);
+      max-width: 66ch;
+      margin-inline: auto;
+      width: min(100% - 2rem, 66ch);
+    }
     .article__eyebrow {
       font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted);
       display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
@@ -155,6 +162,13 @@ const canon = new URL(postUrl(post), siteUrl).toString();
     .article__title {
       margin-top: 12px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; font-weight: 800; max-width: 20ch;
       text-wrap: balance;
+    }
+    .article__title :global(.code) {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.72em; font-weight: 500;
+      background: var(--paper-raised); border: 1px solid var(--rule);
+      padding: 0.08em 0.35em; border-radius: 4px;
+      white-space: nowrap;
     }
     .article__dek { margin-top: 12px; font-size: 1.15rem; line-height: 1.5; color: var(--ink-muted); max-width: 66ch; }
     .article__stance { margin-top: 12px; font-size: 0.8rem; color: var(--ink-muted); }

@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
-import { slugFromFilename, postUrl, projectSlug, reviewSlug, excerptFromBody } from "../utils/slug";
+import { slugFromFilename, postUrl, projectSlug, reviewSlug, excerptFromBody, plainTitle } from "../utils/slug";
 
 export const GET: APIRoute = async () => {
   const posts = await getCollection("posts");
@@ -11,7 +11,7 @@ export const GET: APIRoute = async () => {
 
   for (const p of posts) {
     entries.push({
-      title: p.data.title || slugFromFilename(p.id) || "Untitled",
+      title: plainTitle(p.data.title || slugFromFilename(p.id) || "Untitled"),
       url: postUrl(p),
       excerpt: p.data.description || excerptFromBody(p.body ?? ""),
       tags: (() => { const raw=(p.data.tags??p.data.tag) as unknown; return Array.isArray(raw)?raw as string[]: raw?[String(raw)]:[]; })(),

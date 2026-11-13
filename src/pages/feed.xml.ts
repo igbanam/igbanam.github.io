@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
-import { slugFromFilename, dateFromFilename, postUrl, excerptFromBody } from "../utils/slug";
+import { slugFromFilename, dateFromFilename, postUrl, excerptFromBody, plainTitle } from "../utils/slug";
 
 function escapeXml(s: string): string {
   return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;");
@@ -22,7 +22,7 @@ export const GET: APIRoute = async ({ site }) => {
   const items = sorted.map(p => {
     const url = new URL(postUrl(p), base).toString();
     const date = getDate(p);
-    const title = p.data.title || slugFromFilename(p.id) || "Untitled";
+    const title = plainTitle(p.data.title || slugFromFilename(p.id) || "Untitled");
     const desc = p.data.description || excerptFromBody(p.body ?? "");
     // Use rendered body as description if available; fallback to plain
     return `    <item>
