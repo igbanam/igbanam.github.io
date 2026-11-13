@@ -1,0 +1,42 @@
+---
+import Base from "../../layouts/Base.astro";
+import EssayRow from "../../components/EssayRow.astro";
+import { getCollection } from "astro:content";
+import { slugFromFilename, dateFromFilename, normalizeCategories, postUrl, readingTime, formatDate, excerptFromBody } from "../../utils/slug";
+
+const posts = await getCollection("posts");
+function getDate(e: any): Date {
+  if (e.data.date) return new Date(e.data.date);
+  const inf = dateFromFilename(e.id);
+  if (inf) return inf;
+  return new Date(0);
+}
+const sorted = [...posts].sort((a,b) => getDate(b).getTime() - getDate(a).getTime());
+---
+
+<Base title="Essays" description="Essays on software — hard thoughts on building, teams, and practice." current="/blog/">
+  <div class="canvas" style="padding: var(--s-8) 0 var(--s-12);">
+    <h1 class="font-display" style="font-size: clamp(2rem, 4vw, 3rem); line-height:1; font-weight:800;">Essays</h1>
+    <p style="color:var(--ink-muted); margin-top:8px; max-width:60ch;">Arguments about software — practical, opinionated, and meant to be disagreed with.</p>
+
+    <div style="margin-top: var(--s-8);">
+      {sorted.map(post => {
+        const cats = normalizeCategories(post.data);
+        const rt = readingTime(post.body ?? "");
+        return (
+          <EssayRow
+            href={postUrl(post)}
+            date={formatDate(getDate(post))}
+            readingTime={rt}
+            title={post.data.title || slugFromFilename(post.id) || "Untitled"}
+            description={post.data.description || excerptFromBody(post.body ?? "")}
+            categories={cats}
+            spiciness={post.data.spiciness}
+            seed={slugFromFilename(post.id)}
+          />
+        );
+      })}
+      {sorted.length === 0 && <p style="color:var(--ink-muted);">No essays yet.</p>}
+    </div>
+  </div>
+</Base>

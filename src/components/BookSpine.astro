@@ -1,0 +1,91 @@
+---
+import { seedInts } from "../utils/slug";
+interface Props {
+  title: string;
+  href: string;
+  excerpt?: string;
+  verdict?: string;
+  rating?: number;
+  author?: string;
+  seed: string;
+}
+const { title, href, excerpt, verdict, rating, author, seed } = Astro.props;
+const ints = seedInts(seed, 4);
+const hues = ["#D8D0C1", "#B7F567", "#C9B8E8", "#FFC9A8", "#AECBFA"];
+const bg = hues[ints[0] % hues.length];
+const stripeCount = 1 + (ints[1] % 3);
+const isProof = ints[0] % 3 === 0;
+---
+
+<details class="book-spine" style={`--spine-bg:${bg}; --spine-accent:${isProof ? 'var(--proof)' : 'var(--ink-muted)'}`}>
+  <summary class="book-spine__summary">
+    <div class="spine-visual" aria-hidden="true">
+      {Array.from({ length: stripeCount }).map((_, i) => (
+        <span class="spine-stripe" style={`opacity:${0.5 - i*0.12}`}></span>
+      ))}
+      <span class="spine-title-vert">{title.slice(0, 32)}</span>
+    </div>
+    <span class="spine-label font-mono">{title}</span>
+  </summary>
+  <div class="book-panel">
+    <h3 class="book-panel__title font-display"><a href={href}>{title}</a></h3>
+    {author && <p class="book-panel__author font-mono">{author}</p>}
+    {rating !== undefined ? (
+      <p class="book-panel__rating font-mono" role="meter" aria-valuenow={rating} aria-valuemin="0" aria-valuemax="5" aria-label={`Rating ${rating} out of 5`}>{rating} / 5</p>
+    ) : (
+      <p class="book-panel__rating font-mono">Unrated</p>
+    )}
+    {(verdict || excerpt) && <p class="book-panel__verdict">“{verdict || excerpt}”</p>}
+    <a href={href} class="book-panel__link font-mono">Read review →</a>
+  </div>
+</details>
+
+<style>
+  .book-spine {
+    border: 1px solid var(--rule);
+    background: var(--paper-raised);
+    overflow: hidden;
+    min-width: 160px;
+    flex: 1;
+  }
+  .book-spine[open] { flex: 1.6; }
+  .book-spine__summary {
+    list-style: none; cursor: pointer;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .book-spine__summary::-webkit-details-marker { display: none; }
+  .spine-visual {
+    height: 220px;
+    background: var(--spine-bg);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    padding-bottom: 12px; gap: 4px;
+    overflow: hidden;
+  }
+  .spine-stripe {
+    height: 3px; width: 60%; background: var(--spine-accent); border-radius: 1px;
+  }
+  .spine-title-vert {
+    writing-mode: vertical-rl; text-orientation: mixed;
+    font-family: "Newsreader", Georgia, serif; font-weight: 600; font-size: 0.75rem;
+    letter-spacing: 0.04em; color: var(--ink); max-height: 140px; overflow: hidden;
+    transform: rotate(180deg);
+  }
+  .spine-label {
+    font-size: 0.7rem; padding: 10px 12px; line-height: 1.4;
+    color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .book-panel {
+    padding: 16px 12px; border-top: 1px solid var(--rule);
+    background: var(--paper);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .book-panel__title { font-size: 1rem; line-height: 1.2; }
+  .book-panel__title a:hover { text-decoration: underline; text-decoration-color: var(--proof); }
+  .book-panel__author { font-size: 0.7rem; color: var(--ink-muted); letter-spacing: 0.04em; }
+  .book-panel__rating { font-size: 0.75rem; color: var(--ink-muted); }
+  .book-panel__verdict { font-size: 0.85rem; color: var(--ink-muted); font-style: italic; line-height: 1.5; }
+  .book-panel__link { font-size: 0.75rem; letter-spacing: 0.04em; color: var(--ink); }
+  .book-panel__link:hover { text-decoration: underline; text-decoration-color: var(--proof); }
+</style>

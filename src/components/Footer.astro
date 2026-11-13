@@ -1,0 +1,64 @@
+---
+---
+
+<footer class="site-footer">
+  <div class="canvas site-footer__inner">
+    <div class="footer-brand">
+      <span class="font-mono" style="font-weight:700; letter-spacing:0.12em; font-size:0.85rem;">IGBANAM</span>
+      <p class="footer-tagline">Hard thoughts on software.</p>
+      <p class="footer-copy">© {new Date().getFullYear()} Igbanam. Built with care.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <div class="footer-col">
+        <h3 class="footer-heading font-mono">Writing</h3>
+        <a href="/blog/">Essays</a>
+        <a href="/categories/">Topics</a>
+        <a href="/feed.xml">RSS</a>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading font-mono">Work</h3>
+        <a href="/projects/">Projects</a>
+        <a href="/reviews/">Reviews</a>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading font-mono">Connect</h3>
+        <a href="/about/">About</a>
+        <a href="https://github.com/igbanam" rel="me">GitHub</a>
+        <a href="https://twitter.com/yaasky" rel="me">Twitter</a>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    padding: var(--s-12) 0 var(--s-8);
+    margin-top: var(--s-16);
+  }
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--s-8);
+  }
+  .footer-tagline {
+    font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
+    font-style: italic; color: var(--ink-muted); margin-top: 4px; font-size: 0.95rem;
+  }
+  .footer-copy {
+    font-size: 0.75rem; color: var(--ink-muted); margin-top: 12px;
+    font-family: ui-monospace, monospace;
+  }
+  .footer-nav { display: flex; gap: var(--s-8); justify-content: flex-end; }
+  .footer-col { display: flex; flex-direction: column; gap: 6px; }
+  .footer-heading {
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 4px;
+  }
+  .footer-col a { font-size: 0.85rem; color: var(--ink-muted); }
+  .footer-col a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--proof); text-decoration-thickness: 2px; }
+  @media (max-width: 640px) {
+    .site-footer__inner { grid-template-columns: 1fr; }
+    .footer-nav { justify-content: flex-start; gap: var(--s-6); }
+  }
+</style>

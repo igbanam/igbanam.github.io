@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import EssayRow from "../../components/EssayRow.astro";
+import { normalizeTags, slugFromFilename, dateFromFilename, postUrl, readingTime, formatDate, excerptFromBody } from "../../utils/slug";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const tags = new Set<string>();
+  for (const p of posts) for (const t of normalizeTags(p.data)) tags.add(t);
+  return [...tags].map(tag => ({ params: { tag }, props: { tag } }));
+}
+const { tag } = Astro.props;
+const posts = await getCollection("posts");
+const filtered = posts.filter(p => normalizeTags(p.data).includes(tag.toLowerCase()));
+function getDate(e: any): Date { if (e.data.date) return new Date(e.data.date); const inf=dateFromFilename(e.id); if(inf) return inf; return new Date(0); }
+const sorted = [...filtered].sort((a,b)=>getDate(b).getTime()-getDate(a).getTime());
+const siteUrl = Astro.site?.toString() ?? "https://igbanam.com/";
+---
+
+<Base title={`Tag: ${tag}`} description={`Essays tagged ${tag}`} canonical={new URL(`/tags/${encodeURIComponent(tag)}/`, siteUrl).toString()} current="/categories/">
+  <div class="canvas" style="padding: var(--s-8) 0 var(--s-12);">
+    <h1 class="font-display" style="font-size:1.8rem; font-weight:800;">Tag: {tag}</h1>
+    <p class="font-mono" style="font-size:0.75rem; color:var(--ink-muted); margin-top:4px;">{sorted.length} {sorted.length===1?'essay':'essays'}</p>
+    <div style="margin-top:16px;">
+      {sorted.map(p => (
+        <EssayRow href={postUrl(p)} date={formatDate(getDate(p))} readingTime={readingTime(p.body??"")} title={p.data.title || slugFromFilename(p.id)} description={p.data.description || excerptFromBody(p.body??"")} categories={[]} seed={slugFromFilename(p.id)} />
+      ))}
+      {sorted.length===0 && <p style="color:var(--ink-muted);">Nothing tagged “{tag}”.</p>}
+    </div>
+  </div>
+</Base>

@@ -1,13 +1,30 @@
-# "iGbanam"
-### _The programmer in the Yasky tripartite_
+# Igbanam — Hard thoughts on software
 
-This site is meant to catalogue my thoughts around programming and what not. The views here are totally mine, and are up for debate. Please engage profusely. You can reach me on [Twitter][1].
+Astro-powered editorial publication. Design: *The Marginalia Terminal* — see [DESIGN-SPEC.md](DESIGN-SPEC.md).
 
-## Build Process
+## Development
 
-This site is built with [Jekyll][2]. Originally hosted on [Github Pages][3], at the time of writing up this README, I am in the process of moving the site to [Netlify][4]. Nothing fancy. Just a static site generator
+```sh
+npm install
+npm run dev        # http://localhost:4321
+npm run build      # output to dist/
+npm run preview
+```
 
-  [1]: https://twitter.com/yaasky
-  [2]: https://jekyllrb.com/
-  [3]: https://pages.github.com/
-  [4]: https://www.netlify.com/
+## Content
+
+Markdown remains the source of truth in the original Jekyll locations:
+
+- `_posts/` → essays (date-based URLs: `/YYYY/MM/DD/slug/`)
+- `_projects/` → projects (`/projects/<slug>/`)
+- `_reviews/` → reviews (`/reviews/<slug>/`)
+
+Front matter is normalized — new editorial fields (`hot_take`, `spiciness`, `stance`, `series`, `status`, `tech`, `github`, `rating`, `verdict`) are optional.
+
+## Deployment
+
+GitHub Pages via GitHub Actions — see `.github/workflows/deploy.yml`. Custom domain: `igbanam.com`.
+
+## Design tokens
+
+See `src/styles/tokens.css` and `src/styles/global.css`.

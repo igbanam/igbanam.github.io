@@ -1,0 +1,91 @@
+---
+interface Props {
+  href: string;
+  date: string;
+  readingTime: number;
+  title: string;
+  description: string;
+  categories?: string[];
+  spiciness?: string;
+  seed: string;
+}
+const { href, date, readingTime: rt, title, description, categories = [], spiciness, seed } = Astro.props;
+---
+
+<article class="essay-row">
+  <div class="essay-row__meta font-mono">
+    <time>{date}</time>
+    <span aria-hidden="true">·</span>
+    <span>{rt} min</span>
+    {spiciness && (
+      <span class="essay-row__spice">
+        <span class="spice-dot" aria-hidden="true"></span>
+        {spiciness}
+      </span>
+    )}
+  </div>
+  <h3 class="essay-row__title font-display">
+    <a href={href}>{title || "Untitled"}</a>
+  </h3>
+  {description && <p class="essay-row__dek">{description}</p>}
+  <div class="essay-row__foot">
+    {categories.length > 0 && (
+      <span class="essay-row__cats font-mono">
+        {categories.map(c => <a href={`/categories/#${encodeURIComponent(c)}`} class="cat-link">{c}</a>)}
+      </span>
+    )}
+    <a href={href} class="read-link font-mono">Read {rt} min →</a>
+  </div>
+</article>
+
+<style>
+  .essay-row {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    transition: background var(--motion-micro) var(--ease-standard);
+  }
+  .essay-row:last-child { border-bottom: none; }
+  .essay-row__meta {
+    font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  }
+  .essay-row__spice { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-muted); }
+  .spice-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--proof); display: inline-block;
+    border: 1px solid color-mix(in srgb, var(--proof) 60%, var(--ink));
+  }
+  .essay-row__title {
+    margin-top: 8px;
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    line-height: 1.15; font-weight: 600;
+  }
+  .essay-row__title a:hover {
+    text-decoration: underline; text-decoration-color: var(--proof); text-decoration-thickness: 3px; text-underline-offset: 4px;
+  }
+  .essay-row__dek {
+    margin-top: 8px; color: var(--ink-muted); font-size: 0.95rem; line-height: 1.6;
+    max-width: 60ch;
+  }
+  .essay-row__foot {
+    margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .essay-row__cats { display: flex; gap: 8px; flex-wrap: wrap; }
+  .cat-link {
+    font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-muted); border: 1px solid var(--rule); border-radius: 999px; padding: 2px 8px;
+  }
+  .cat-link:hover { color: var(--ink); border-color: var(--ink-muted); }
+  .read-link {
+    font-size: 0.75rem; letter-spacing: 0.04em; color: var(--ink-muted);
+    opacity: 0; transform: translateX(-4px);
+    transition: opacity var(--motion-micro) var(--ease-standard), transform var(--motion-micro) var(--ease-standard), color var(--motion-micro) var(--ease-standard);
+  }
+  @media (hover: hover) {
+    .essay-row:hover .read-link { opacity: 1; transform: translateX(0); }
+  }
+  @media (max-width: 640px) {
+    .read-link { opacity: 1; transform: none; }
+  }
+  .read-link:hover { color: var(--ink); }
+</style>

@@ -1,0 +1,129 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  current?: string;
+  noIndex?: boolean;
+}
+const { title, description = "Hard thoughts on software.", canonical, ogImage, current = "", noIndex } = Astro.props;
+const siteUrl = Astro.site?.toString() ?? "https://igbanam.com/";
+const canon = canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
+const fullTitle = title ? `${title} — Igbanam` : "Igbanam — Hard thoughts on software";
+const ogImg = ogImage ?? new URL("/og-default.svg", siteUrl).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canon} />
+    <link rel="alternate" type="application/rss+xml" title="Igbanam RSS" href="/feed.xml" />
+    {noIndex && <meta name="robots" content="noindex" />}
+    <meta property="og:title" content={title || "Igbanam"} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canon} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImg} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title || "Igbanam"} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImg} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" />
+    <script is:inline>
+      // Theme: apply before paint to avoid flash
+      try {
+        const t = localStorage.getItem('igbanam-theme');
+        if (t && t !== 'system') document.documentElement.setAttribute('data-theme', t);
+      } catch {}
+    </script>
+    <style is:global>
+      /* System font fallbacks for editorial feel */
+      @font-face {
+        font-family: "Newsreader-fallback";
+        src: local("Iowan Old Style"), local("Palatino Linotype"), local("Georgia");
+        size-adjust: 104%; ascent-override: 92%;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header current={current} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Search dialog (progressive enhancement) -->
+    <dialog id="search-dialog" aria-label="Search" style="padding:0; border:1px solid var(--rule); background:var(--paper-raised); width:min(40rem, calc(100% - 2rem)); max-width:90vw; border-radius:8px;">
+      <form method="dialog" style="display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--rule);">
+        <input id="search-input" type="search" placeholder="Search essays, projects, reviews…" autocomplete="off"
+          style="flex:1; border:1px solid var(--rule); background:var(--paper); color:var(--ink); padding:8px 12px; border-radius:6px; font-size:0.9rem;" />
+        <button type="submit" value="close" style="background:none; border:1px solid var(--rule); border-radius:6px; padding:6px 10px; cursor:pointer; color:var(--ink);">✕</button>
+      </form>
+      <div id="search-results" style="max-height:50vh; overflow:auto; padding:8px 0;"></div>
+      <div id="search-quick-links" style="padding:12px 16px; display:flex; flex-direction:column; gap:6px;">
+        <a href="/blog/" style="font-size:0.85rem; color:var(--ink-muted);">Essays →</a>
+        <a href="/projects/" style="font-size:0.85rem; color:var(--ink-muted);">Projects →</a>
+        <a href="/reviews/" style="font-size:0.85rem; color:var(--ink-muted);">Reviews →</a>
+        <a href="/categories/" style="font-size:0.85rem; color:var(--ink-muted);">Topics →</a>
+        <a href="/feed.xml" style="font-size:0.85rem; color:var(--ink-muted);">RSS →</a>
+      </div>
+    </dialog>
+    <script>
+      const dlg = document.getElementById('search-dialog') as HTMLDialogElement | null;
+      const input = document.getElementById('search-input') as HTMLInputElement | null;
+      const resultsEl = document.getElementById('search-results');
+      const quickLinks = document.getElementById('search-quick-links');
+      function openSearch() {
+        dlg?.showModal();
+        input?.focus();
+      }
+      document.getElementById('search-trigger')?.addEventListener('click', openSearch);
+      // Keyboard shortcut
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          if (dlg?.open) dlg.close(); else openSearch();
+        }
+        if (e.key === '/' && !dlg?.open && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+          // optional: / to search
+        }
+      });
+
+      input?.addEventListener('input', async () => {
+        const q = input.value.trim();
+        if (!q) {
+          if (resultsEl) resultsEl.innerHTML = '';
+          if (quickLinks) quickLinks.style.display = '';
+          return;
+        }
+        if (quickLinks) quickLinks.style.display = 'none';
+        // Client-side search over inlined index (pagefind can be added later as post-build step)
+        try {
+          const res = await fetch('/search-index.json');
+          const idx: Array<{title:string, url:string, excerpt:string, tags:string[]}> = await res.json();
+          const ql = q.toLowerCase();
+          const hits = idx.filter(e => (e.title + ' ' + e.excerpt + ' ' + e.tags.join(' ')).toLowerCase().includes(ql)).slice(0, 8);
+          if (resultsEl) {
+            resultsEl.innerHTML = hits.length ? hits.map(h =>
+              `<a href="${h.url}" style="display:block; padding:10px 16px; border-bottom:1px solid var(--rule);"><span style="font-size:0.9rem; color:var(--ink); font-weight:600;">${h.title}</span><br/><span style="font-size:0.8rem; color:var(--ink-muted);">${h.excerpt.slice(0,120)}</span></a>`
+            ).join('') : '<p style="padding:12px 16px; color:var(--ink-muted); font-size:0.85rem;">No results.</p>';
+          }
+        } catch {
+          if (resultsEl) resultsEl.innerHTML = '<p style="padding:12px 16px; color:var(--ink-muted); font-size:0.85rem;">Search index not available.</p>';
+        }
+      });
+    </script>
+  </body>
+</html>

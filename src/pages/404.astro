@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Not found" description="Page not found — hard thoughts on software." noIndex current="">
+  <div class="canvas" style="padding: var(--s-16) 0; text-align:center; max-width:40ch; margin-inline:auto;">
+    <p class="font-mono" style="font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted);">404</p>
+    <h1 class="font-display" style="font-size:2rem; margin-top:8px;">This argument hasn't been written yet.</h1>
+    <p style="color:var(--ink-muted); margin-top:12px;">The page you followed doesn't exist. Try the essays, projects, or topics.</p>
+    <div style="display:flex; gap:12px; justify-content:center; margin-top:20px; flex-wrap:wrap;">
+      <a href="/blog/" class="font-mono" style="border:1px solid var(--rule); border-radius:999px; padding:8px 16px; font-size:0.8rem;">Essays</a>
+      <a href="/categories/" class="font-mono" style="border:1px solid var(--rule); border-radius:999px; padding:8px 16px; font-size:0.8rem;">Topics</a>
+      <a href="/" class="font-mono" style="background:var(--ink); color:var(--paper); border-radius:999px; padding:8px 16px; font-size:0.8rem;">Home</a>
+    </div>
+  </div>
+</Base>

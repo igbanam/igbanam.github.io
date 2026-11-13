@@ -1,0 +1,20 @@
+---
+import Base from "../../layouts/Base.astro";
+import BookSpine from "../../components/BookSpine.astro";
+import { getCollection } from "astro:content";
+import { reviewSlug } from "../../utils/slug";
+const reviews = await getCollection("reviews");
+---
+
+<Base title="Reviews" description="Books argued with — honest reading notes." current="/reviews/">
+  <div class="canvas" style="padding: var(--s-8) 0 var(--s-12);">
+    <h1 class="font-display" style="font-size: clamp(2rem, 4vw, 3rem); font-weight:800; line-height:1;">Books I argued with</h1>
+    <p style="color:var(--ink-muted); margin-top:8px;">Reading history as a shelf. Each spine opens into a verdict.</p>
+    <div style="display:flex; gap:12px; overflow-x:auto; padding:16px 0 8px; margin-top:16px; scroll-snap-type:x proximity;">
+      {reviews.map(r => (
+        <BookSpine title={r.data.title} href={`/reviews/${reviewSlug(r.id)}/`} excerpt={r.data.excerpt} verdict={r.data.verdict} rating={r.data.rating} author={r.data.author} seed={reviewSlug(r.id)} />
+      ))}
+      {reviews.length===0 && <p style="color:var(--ink-muted);">No reviews yet.</p>}
+    </div>
+  </div>
+</Base>

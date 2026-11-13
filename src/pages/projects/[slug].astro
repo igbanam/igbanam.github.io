@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { projectSlug, formatDate, dateFromFilename } from "../../utils/slug";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map(p => ({ params: { slug: projectSlug(p.id) }, props: { project: p } }));
+}
+const { project } = Astro.props;
+const { Content } = await render(project);
+const siteUrl = Astro.site?.toString() ?? "https://igbanam.com/";
+const canon = new URL(`/projects/${projectSlug(project.id)}/`, siteUrl).toString();
+const title = project.data.title;
+const description = project.data.description || project.data.excerpt || "";
+---
+
+<Base title={title} description={description} canonical={canon} current="/projects/">
+  <article class="canvas" style="padding: var(--s-8) 0 var(--s-12); max-width:66ch;">
+    <p class="font-mono" style="font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-muted);">
+      {project.data.status ? <span>Status: {project.data.status}</span> : <span>Project</span>}
+      {project.data.date && <> · <time>{formatDate(new Date(project.data.date))}</time></>}
+    </p>
+    <h1 class="font-display" style="font-size: clamp(1.8rem, 4vw, 2.6rem); margin-top:8px; line-height:1.05;">{title}</h1>
+    {description && <p style="color:var(--ink-muted); margin-top:10px;">{description}</p>}
+    {project.data.tech && <p class="font-mono" style="font-size:0.7rem; color:var(--ink-muted); margin-top:8px;">{project.data.tech.join(" · ")}</p>}
+    {project.data.github && <p style="margin-top:12px;"><a href={project.data.github} rel="noopener" target="_blank" class="font-mono" style="font-size:0.8rem; border:1px solid var(--rule); border-radius:999px; padding:6px 12px;">View on GitHub ↗</a></p>}
+    <div class="prose" style="margin-top:24px; line-height:1.75;">
+      <Content />
+    </div>
+  </article>
+  <style is:global>
+    .prose a { text-decoration: underline; text-decoration-color: var(--proof); text-decoration-thickness:2px; }
+    .prose pre { background: var(--paper-raised); border:1px solid var(--rule); padding:14px; overflow-x:auto; border-radius:4px; margin-top:1rem; }
+    .prose blockquote { border-left:3px solid var(--proof); padding:8px 16px; background: var(--paper-raised); margin-top:1rem; font-style:italic; color:var(--ink-muted); }
+    .prose p { margin-top:1rem; }
+    .prose h2 { font-size:1.4rem; margin-top:1.5rem; }
+  </style>
+</Base>

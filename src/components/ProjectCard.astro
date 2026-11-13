@@ -1,0 +1,73 @@
+---
+interface Props {
+  title: string;
+  href: string;
+  description: string;
+  status?: string;
+  tech?: string[];
+  github?: string;
+}
+const { title, href, description, status, tech = [], github } = Astro.props;
+
+const statusMeta: Record<string, { label: string; shape: string }> = {
+  shipped: { label: "Shipped", shape: "■" },
+  "in-progress": { label: "In progress", shape: "◧" },
+  abandoned: { label: "Abandoned", shape: "—" },
+};
+const sm = status ? statusMeta[status] : null;
+---
+
+<article class="project-card" data-status={status ?? "unclassified"}>
+  <div class="project-card__head font-mono">
+    {sm ? (
+      <span class="status-badge" data-status={status}>
+        <span aria-hidden="true">{sm.shape}</span> {sm.label}
+      </span>
+    ) : (
+      <span class="status-badge status-badge--muted">Unclassified</span>
+    )}
+    {github && <a href={github} class="gh-link font-mono" rel="noopener" target="_blank" aria-label={`GitHub repository for ${title}`}>GitHub ↗</a>}
+  </div>
+  <h3 class="project-card__title font-display">
+    <a href={href}>{title}</a>
+  </h3>
+  {description && <p class="project-card__desc">{description}</p>}
+  {tech.length > 0 && (
+    <div class="project-card__tech font-mono">
+      {tech.map(t => <span class="tech-tag">{t}</span>)}
+    </div>
+  )}
+  {!github && <p class="project-card__no-repo font-mono">No repository linked</p>}
+</article>
+
+<style>
+  .project-card {
+    border: 1px solid var(--rule);
+    background: var(--paper-raised);
+    padding: 1.25rem;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: border-color var(--motion-micro) var(--ease-standard), transform var(--motion-micro) var(--ease-standard);
+  }
+  .project-card:hover { border-color: var(--ink-muted); transform: translateY(-2px); }
+  .project-card__head {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--ink-muted);
+  }
+  .status-badge[data-status="shipped"] { color: var(--ink); }
+  .status-badge[data-status="abandoned"] { text-decoration: line-through; text-decoration-color: var(--rule); }
+  .gh-link { color: var(--ink-muted); border: 1px solid var(--rule); border-radius: 999px; padding: 2px 8px; font-size: 0.65rem; }
+  .gh-link:hover { color: var(--ink); border-color: var(--ink-muted); }
+  .project-card__title { font-size: 1.15rem; line-height: 1.2; font-weight: 600; }
+  .project-card__title a:hover { text-decoration: underline; text-decoration-color: var(--proof); text-decoration-thickness: 2px; }
+  .project-card__desc { color: var(--ink-muted); font-size: 0.9rem; line-height: 1.6; }
+  .project-card__tech { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tech-tag {
+    font-size: 0.65rem; letter-spacing: 0.04em; text-transform: uppercase;
+    border: 1px solid var(--rule); border-radius: 999px; padding: 2px 8px; color: var(--ink-muted);
+  }
+  .project-card__no-repo { font-size: 0.7rem; color: var(--ink-muted); font-style: italic; }
+</style>

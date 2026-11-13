@@ -1,0 +1,301 @@
+---
+import Base from "../layouts/Base.astro";
+import ArgumentMark from "../components/ArgumentMark.astro";
+import NowStrip from "../components/NowStrip.astro";
+import EssayRow from "../components/EssayRow.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import BookSpine from "../components/BookSpine.astro";
+import { getCollection } from "astro:content";
+import { slugFromFilename, dateFromFilename, normalizeCategories, normalizeTags, postUrl, projectSlug, reviewSlug, readingTime, formatDate, excerptFromBody } from "../utils/slug";
+import nowData from "../data/now.json";
+
+const posts = await getCollection("posts");
+const projects = await getCollection("projects");
+const reviews = await getCollection("reviews");
+
+// Sort posts by date desc
+function getDate(e: any): Date {
+  if (e.data.date) return new Date(e.data.date);
+  const inferred = dateFromFilename(e.id);
+  if (inferred) return inferred;
+  return new Date(0);
+}
+const sortedPosts = [...posts].sort((a, b) => getDate(b).getTime() - getDate(a).getTime());
+
+// Hot take: most recent post with hot_take, fallback to most recent post
+const hotTakeEntry = sortedPosts.find(p => p.data.hot_take) ?? sortedPosts[0];
+const hotTake = hotTakeEntry ? {
+  text: hotTakeEntry.data.hot_take ?? hotTakeEntry.data.description ?? hotTakeEntry.data.title ?? "Hard thoughts on software.",
+  title: hotTakeEntry.data.title || "Untitled",
+  href: postUrl(hotTakeEntry),
+  stance: hotTakeEntry.data.stance,
+} : null;
+
+// Latest post for now strip
+const latestPost = sortedPosts[0];
+const latestForStrip = latestPost ? {
+  title: latestPost.data.title || slugFromFilename(latestPost.id),
+  href: postUrl(latestPost),
+  date: formatDate(getDate(latestPost)),
+} : { title: "No essays yet", href: "/blog/", date: "" };
+
+// Musings: latest essays (5)
+const musings = sortedPosts.slice(0, 5);
+
+// Projects preview (up to 6)
+const sortedProjects = [...projects].sort((a,b) => {
+  const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return db - da;
+});
+const featuredProjects = sortedProjects.slice(0, 6);
+---
+
+<Base title="" description="Hard thoughts on software — essays, projects, and reviews by Igbanam." current="/">
+  <!-- Hero -->
+  <section class="hero canvas">
+    <div class="hero__left">
+      <h1 class="hero__headline font-display">
+        <span>Hard thoughts</span>
+        <span>on software.</span>
+      </h1>
+      <p class="hero__dek">Essays on the practical consequences of taking software seriously.</p>
+
+      {hotTake && (
+        <aside class="hero__take" aria-label="Today's position">
+          <span class="hero__take-label font-mono">Today's position</span>
+          <blockquote class="hero__quote">“{hotTake.text}”</blockquote>
+          <div class="hero__take-meta font-mono">
+            <span>— {hotTake.title}</span>
+            {hotTake.stance && <span class="hero__stance">Position: {hotTake.stance}</span>}
+          </div>
+          <a href={hotTake.href} class="hero__take-link font-mono">Read the argument →</a>
+        </aside>
+      )}
+    </div>
+    <div class="hero__right">
+      <ArgumentMark seed={hotTakeEntry ? slugFromFilename(hotTakeEntry.id) : "igbanam"} />
+    </div>
+  </section>
+
+  <NowStrip latest={latestForStrip} building={nowData.building} reading={nowData.reading} />
+
+  <!-- Musings -->
+  <section class="section canvas">
+    <div class="section__head">
+      <h2 class="section__title font-display">Recent arguments</h2>
+      <a href="/blog/" class="section__link font-mono">View all essays →</a>
+    </div>
+    <div class="musings-list">
+      {musings.map(post => {
+        const body = post.body ?? "";
+        const rt = readingTime(body || post.data.description || "");
+        const cats = normalizeCategories(post.data);
+        return (
+          <EssayRow
+            href={postUrl(post)}
+            date={formatDate(getDate(post))}
+            readingTime={rt}
+            title={post.data.title || slugFromFilename(post.id)}
+            description={post.data.description || excerptFromBody(body)}
+            categories={cats}
+            spiciness={post.data.spiciness}
+            seed={slugFromFilename(post.id)}
+          />
+        );
+      })}
+      {musings.length === 0 && <p style="color:var(--ink-muted); padding:1rem 0;">No essays published yet.</p>}
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section canvas">
+    <div class="section__head">
+      <div>
+        <h2 class="section__title font-display">The public lab</h2>
+        <p class="section__dek">Finished work earns a page. Failed experiments do too.</p>
+      </div>
+      <a href="/projects/" class="section__link font-mono">All projects →</a>
+    </div>
+
+    <div class="project-filters font-mono" role="group" aria-label="Filter projects by status">
+      <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="filter-btn" data-filter="shipped" aria-pressed="false">Shipped</button>
+      <button type="button" class="filter-btn" data-filter="in-progress" aria-pressed="false">In progress</button>
+      <button type="button" class="filter-btn" data-filter="abandoned" aria-pressed="false">Abandoned</button>
+    </div>
+
+    <div class="project-grid" id="project-grid">
+      {featuredProjects.map(p => (
+        <ProjectCard
+          title={p.data.title}
+          href={`/projects/${projectSlug(p.id)}/`}
+          description={p.data.description || excerptFromBody(p.body ?? "")}
+          status={p.data.status}
+          tech={p.data.tech ?? (p.data.tag ? [p.data.tag] : [])}
+          github={p.data.github}
+        />
+      ))}
+      {featuredProjects.length === 0 && <p style="color:var(--ink-muted);">No projects yet.</p>}
+    </div>
+    <p id="project-empty" class="filter-empty font-mono" hidden>Nothing filed under this state yet. Try all projects.</p>
+  </section>
+
+  <!-- Reviews / Bookshelf -->
+  <section class="section canvas">
+    <div class="section__head">
+      <h2 class="section__title font-display">Books I argued with</h2>
+      <a href="/reviews/" class="section__link font-mono">All reviews →</a>
+    </div>
+    {reviews.length > 0 ? (
+      <div class="bookshelf">
+        {reviews.map(r => (
+          <BookSpine
+            title={r.data.title}
+            href={`/reviews/${reviewSlug(r.id)}/`}
+            excerpt={r.data.excerpt}
+            verdict={r.data.verdict}
+            rating={r.data.rating}
+            author={r.data.author}
+            seed={reviewSlug(r.id)}
+          />
+        ))}
+      </div>
+    ) : (
+      <p style="color:var(--ink-muted);">No reviews yet.</p>
+    )}
+  </section>
+
+  <!-- Subscribe -->
+  <section class="subscribe canvas">
+    <div class="subscribe__inner">
+      <h2 class="font-display" style="font-size:1.5rem;">Stay in the argument</h2>
+      <p style="color:var(--ink-muted); margin-top:6px;">Prefer your own reader? Follow the full feed. No account required.</p>
+      <a href="/feed.xml" class="subscribe__cta font-mono">Follow via RSS →</a>
+      <p class="subscribe__note font-mono">Newsletter coming soon. RSS works today.</p>
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: var(--s-8);
+      padding: var(--s-12) 0 var(--s-8);
+      align-items: start;
+    }
+    .hero__headline {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 0.92; font-weight: 800; letter-spacing: -0.02em;
+      display: flex; flex-direction: column;
+    }
+    .hero__headline span:last-child { font-style: italic; font-weight: 400; }
+    .hero__dek {
+      margin-top: 16px; font-size: 1.1rem; line-height: 1.5; color: var(--ink-muted);
+      max-width: 36ch;
+    }
+    .hero__take {
+      margin-top: 32px;
+      border-left: 3px solid var(--proof);
+      padding: 16px 20px;
+      background: var(--paper-raised);
+      border-top: 1px solid var(--rule); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .hero__take-label {
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted);
+    }
+    .hero__quote {
+      margin-top: 8px; font-family: "Newsreader", Georgia, serif;
+      font-size: 1.1rem; line-height: 1.45; font-style: italic;
+      border: none; padding: 0;
+    }
+    .hero__take-meta {
+      margin-top: 10px; font-size: 0.7rem; color: var(--ink-muted);
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .hero__stance { color: var(--ink); }
+    .hero__take-link {
+      display: inline-block; margin-top: 10px;
+      font-size: 0.75rem; letter-spacing: 0.04em; color: var(--ink);
+      border-bottom: 2px solid var(--proof);
+    }
+    .hero__right { display: flex; justify-content: flex-end; align-items: flex-start; }
+
+    .section { padding: var(--s-12) 0 var(--s-8); }
+    .section__head {
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+      border-bottom: 1px solid var(--rule); padding-bottom: 12px; margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .section__title { font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 700; line-height: 1.1; }
+    .section__dek { font-size: 0.85rem; color: var(--ink-muted); margin-top: 4px; }
+    .section__link { font-size: 0.75rem; letter-spacing: 0.04em; color: var(--ink-muted); white-space: nowrap; }
+    .section__link:hover { color: var(--ink); }
+
+    .musings-list { display: flex; flex-direction: column; }
+
+    .project-filters { display: flex; gap: 8px; margin: 12px 0 16px; flex-wrap: wrap; }
+    .filter-btn {
+      font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
+      background: var(--paper); color: var(--ink-muted);
+      border: 1px solid var(--rule); border-radius: 999px; padding: 6px 14px; cursor: pointer;
+    }
+    .filter-btn.is-active, .filter-btn[aria-pressed="true"] {
+      background: var(--ink); color: var(--paper); border-color: var(--ink);
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+      gap: 16px;
+    }
+    .filter-empty { color: var(--ink-muted); font-size: 0.85rem; padding: 16px 0; }
+
+    .bookshelf {
+      display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px;
+      scroll-snap-type: x proximity;
+    }
+    .bookshelf > * { scroll-snap-align: start; }
+
+    .subscribe {
+      margin: var(--s-12) auto; text-align: center;
+      border: 1px solid var(--rule); background: var(--paper-raised);
+      padding: var(--s-8) var(--s-6);
+    }
+    .subscribe__cta {
+      display: inline-block; margin-top: 16px;
+      background: var(--ink); color: var(--paper); padding: 10px 20px; border-radius: 999px;
+      font-size: 0.85rem; letter-spacing: 0.04em;
+    }
+    .subscribe__note { font-size: 0.7rem; color: var(--ink-muted); margin-top: 10px; }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero__right { justify-content: flex-start; max-width: 320px; }
+    }
+  </style>
+
+  <script>
+    // Project filter (vanilla, only on home + projects index)
+    const grid = document.getElementById('project-grid');
+    const empty = document.getElementById('project-empty');
+    const btns = document.querySelectorAll('.filter-btn');
+    if (grid && btns.length) {
+      const cards = Array.from(grid.children) as HTMLElement[];
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const f = (btn as HTMLElement).dataset.filter;
+          btns.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-pressed','false'); });
+          btn.classList.add('is-active'); btn.setAttribute('aria-pressed','true');
+          let visible = 0;
+          cards.forEach(c => {
+            const show = f === 'all' || c.getAttribute('data-status') === f;
+            c.hidden = !show;
+            (c as HTMLElement).style.display = show ? '' : 'none';
+            if (show) visible++;
+          });
+          if (empty) empty.hidden = visible !== 0;
+        });
+      });
+    }
+  </script>
+</Base>

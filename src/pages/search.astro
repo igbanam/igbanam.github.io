@@ -1,0 +1,18 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Search" description="Search essays, projects, and reviews." current="">
+  <div class="canvas" style="padding: var(--s-8) 0 var(--s-12); max-width:40rem;">
+    <h1 class="font-display" style="font-size:1.8rem; font-weight:800;">Search</h1>
+    <p style="color:var(--ink-muted); margin-top:8px;">Press <span class="font-mono" style="border:1px solid var(--rule); padding:2px 6px; border-radius:4px; font-size:0.75rem;">⌘K</span> anywhere to open the command palette.</p>
+    <p style="margin-top:16px;">Or browse:</p>
+    <ul style="list-style:none; margin-top:8px; display:flex; flex-direction:column; gap:8px;">
+      <li><a href="/blog/" style="text-decoration:underline; text-decoration-color:var(--proof);">Essays</a></li>
+      <li><a href="/projects/" style="text-decoration:underline; text-decoration-color:var(--proof);">Projects</a></li>
+      <li><a href="/reviews/" style="text-decoration:underline; text-decoration-color:var(--proof);">Reviews</a></li>
+      <li><a href="/categories/" style="text-decoration:underline; text-decoration-color:var(--proof);">Topics</a></li>
+      <li><a href="/feed.xml" style="text-decoration:underline; text-decoration-color:var(--proof);">RSS</a></li>
+    </ul>
+  </div>
+</Base>
