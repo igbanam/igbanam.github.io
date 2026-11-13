@@ -1,0 +1,75 @@
+/* ════════════════════════════════════════════════
+   Design tokens — The Marginalia Terminal
+   Spec §4.1 – §4.5
+   ════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light dark;
+
+  /* — Color tokens — */
+  --paper: light-dark(#F5F0E6, #131210);
+  --paper-raised: light-dark(#FFFDF7, #1C1A17);
+  --ink: light-dark(#1B1A17, #F6F0E5);
+  --ink-muted: light-dark(#625E55, #BBB3A5);
+  --rule: light-dark(#D8D0C1, #413C35);
+  --proof: light-dark(#B7F567, #C6FF7D);
+  --proof-ink: light-dark(#1F3A08, #152800);
+  --danger: light-dark(#A83A28, #FF907D);
+  --focus: light-dark(#2A63C7, #9BC0FF);
+
+  /* — Motion tokens — */
+  --motion-micro: 140ms;
+  --motion-standard: 220ms;
+  --motion-emphasis: 420ms;
+  --ease-standard: cubic-bezier(.2, .8, .2, 1);
+  --ease-entry: cubic-bezier(.16, 1, .3, 1);
+
+  /* — Spacing scale — */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-24: 96px;
+  --s-36: 144px;
+
+  /* — Layout — */
+  --canvas: min(100% - 2rem, 78rem);
+  --reading: min(100%, 66ch);
+  --wide: min(100% - 2rem, 92rem);
+}
+
+/* Dark/light explicit override via data-theme */
+html[data-theme="light"] { color-scheme: light; }
+html[data-theme="dark"] { color-scheme: dark; }
+
+/* Ensure light-dark() falls back when not supported */
+@supports not (color: light-dark(white, black)) {
+  :root {
+    --paper: #F5F0E6;
+    --paper-raised: #FFFDF7;
+    --ink: #1B1A17;
+    --ink-muted: #625E55;
+    --rule: #D8D0C1;
+    --proof: #B7F567;
+    --proof-ink: #1F3A08;
+    --danger: #A83A28;
+    --focus: #2A63C7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #131210;
+      --paper-raised: #1C1A17;
+      --ink: #F6F0E5;
+      --ink-muted: #BBB3A5;
+      --rule: #413C35;
+      --proof: #C6FF7D;
+      --proof-ink: #152800;
+      --danger: #FF907D;
+      --focus: #9BC0FF;
+    }
+  }
+}

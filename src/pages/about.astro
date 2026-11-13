@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+// About content is authored in about.md at repo root — we render it via collection or inline
+// For now, render inline editorial copy consistent with the repo's about.md
+---
+
+<Base title="About" description="About Igbanam — writer, engineer, contrarian." current="/about/">
+  <div class="canvas" style="padding: var(--s-8) 0 var(--s-12); max-width:66ch;">
+    <h1 class="font-display" style="font-size: clamp(2rem, 4vw, 3rem); font-weight:800; line-height:1;">About</h1>
+    <div style="margin-top:20px; line-height:1.75; display:flex; flex-direction:column; gap:1rem;">
+      <p>I am a glorified typist. I type, and things happen; to machines and people. I write Ruby, Java, Python, and Scala; all in Vim. Once in a while, I get a few Mortal Kombat games in. I am interested in orthogonal thought.</p>
+      <p>This site is called <em>Hard thoughts on software</em> — essays on the practical consequences of taking software seriously. It is a publication, not a portfolio. Expect arguments you can disagree with in public.</p>
+      <h2 class="font-display" style="font-size:1.3rem; margin-top:8px;">Editorial policy</h2>
+      <p>Essays strive to be opinionated, cited, and short enough to finish. Code examples are real. Positions include boundary conditions. Comments live on GitHub Discussions via Giscus.</p>
+      <h2 class="font-display" style="font-size:1.3rem; margin-top:8px;">Follow</h2>
+      <ul style="padding-left:1.25rem;">
+        <li><a href="/feed.xml" style="text-decoration:underline; text-decoration-color:var(--proof);">RSS</a> — the canonical way to follow.</li>
+        <li><a href="https://github.com/igbanam" rel="me" style="text-decoration:underline; text-decoration-color:var(--proof);">GitHub</a></li>
+        <li><a href="https://twitter.com/yaasky" rel="me" style="text-decoration:underline; text-decoration-color:var(--proof);">Twitter</a></li>
+      </ul>
+    </div>
+  </div>
+</Base>

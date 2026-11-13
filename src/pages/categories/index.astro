@@ -1,0 +1,62 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { normalizeCategories, normalizeTags, slugFromFilename, postUrl, projectSlug } from "../../utils/slug";
+
+const posts = await getCollection("posts");
+const projects = await getCollection("projects");
+
+// Aggregate topics from categories + tags
+type TopicInfo = { name: string; count: number; posts: any[]; projects: any[] };
+const topics = new Map<string, TopicInfo>();
+function addTopic(name: string, entry: any, kind: 'post'|'project') {
+  const key = name.toLowerCase();
+  if (!topics.has(key)) topics.set(key, { name, count: 0, posts: [], projects: [] });
+  const t = topics.get(key)!;
+  t.count++;
+  if (kind === 'post') t.posts.push(entry);
+  else t.projects.push(entry);
+}
+for (const p of posts) {
+  for (const c of normalizeCategories(p.data)) addTopic(c, p, 'post');
+  for (const t of normalizeTags(p.data)) addTopic(t, p, 'post');
+}
+for (const p of projects) {
+  for (const c of normalizeCategories(p.data)) addTopic(c, p, 'project');
+}
+const sortedTopics = [...topics.values()].sort((a,b) => b.count - a.count);
+---
+
+<Base title="Topics" description="Browse essays and projects by topic." current="/categories/">
+  <div class="canvas" style="padding: var(--s-8) 0 var(--s-12);">
+    <h1 class="font-display" style="font-size: clamp(2rem, 4vw, 3rem); font-weight:800; line-height:1;">Topics</h1>
+    <p style="color:var(--ink-muted); margin-top:8px;">A map, not a filing cabinet.</p>
+
+    {sortedTopics.length === 0 ? (
+      <p style="color:var(--ink-muted); margin-top:16px;">No topics yet.</p>
+    ) : (
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap:16px; margin-top:24px;">
+        {sortedTopics.map(topic => (
+          <article id={encodeURIComponent(topic.name)} style="border:1px solid var(--rule); background:var(--paper-raised); padding:16px;">
+            <h2 class="font-display" style="font-size:1.1rem;">
+              {topic.name}
+              <span class="font-mono" style="font-size:0.7rem; color:var(--ink-muted); margin-left:8px;">{topic.count}</span>
+            </h2>
+            <ul style="list-style:none; margin-top:10px; display:flex; flex-direction:column; gap:6px;">
+              {topic.posts.slice(0,4).map((p: any) => (
+                <li><a href={postUrl(p)} style="font-size:0.9rem; text-decoration:underline; text-decoration-color:var(--proof);">{p.data.title || slugFromFilename(p.id)}</a></li>
+              ))}
+              {topic.projects.slice(0,2).map((p: any) => (
+                <li><a href={`/projects/${projectSlug(p.id)}/`} style="font-size:0.85rem; color:var(--ink-muted);">{p.data.title} — project</a></li>
+              ))}
+            </ul>
+            <p class="font-mono" style="font-size:0.65rem; color:var(--ink-muted); margin-top:10px;">
+              {topic.count} {topic.count===1?'item':'items'} · {topic.posts.length} essays
+              {topic.projects.length ? ` · ${topic.projects.length} projects` : ''}
+            </p>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</Base>

@@ -1,0 +1,61 @@
+---
+import Base from "../../layouts/Base.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
+import { projectSlug, excerptFromBody } from "../../utils/slug";
+
+const projects = await getCollection("projects");
+const sorted = [...projects].sort((a,b) => {
+  const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return db - da;
+});
+---
+
+<Base title="Projects" description="Experiments, tools, and notes from the public lab." current="/projects/">
+  <div class="canvas" style="padding: var(--s-8) 0 var(--s-12);">
+    <h1 class="font-display" style="font-size: clamp(2rem, 4vw, 3rem); font-weight:800; line-height:1;">The public lab</h1>
+    <p style="color:var(--ink-muted); margin-top:8px; max-width:60ch;">Finished work earns a page. Failed experiments do too.</p>
+
+    <div class="project-filters font-mono" role="group" aria-label="Filter projects" style="display:flex; gap:8px; margin:16px 0; flex-wrap:wrap;">
+      <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="filter-btn" data-filter="shipped" aria-pressed="false">Shipped</button>
+      <button type="button" class="filter-btn" data-filter="in-progress" aria-pressed="false">In progress</button>
+      <button type="button" class="filter-btn" data-filter="abandoned" aria-pressed="false">Abandoned</button>
+    </div>
+
+    <div class="project-grid" id="project-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(17rem,100%),1fr)); gap:16px;">
+      {sorted.map(p => (
+        <ProjectCard
+          title={p.data.title}
+          href={`/projects/${projectSlug(p.id)}/`}
+          description={p.data.description || excerptFromBody(p.body ?? "")}
+          status={p.data.status}
+          tech={p.data.tech ?? (p.data.tag ? [p.data.tag] : [])}
+          github={p.data.github}
+        />
+      ))}
+      {sorted.length === 0 && <p style="color:var(--ink-muted);">No projects yet.</p>}
+    </div>
+    <p id="project-empty" class="font-mono" style="color:var(--ink-muted); font-size:0.85rem; padding:16px 0;" hidden>Nothing filed under this state yet. Try all projects.</p>
+  </div>
+  <style>
+    .filter-btn { font-size:0.7rem; letter-spacing:0.05em; text-transform:uppercase; background:var(--paper); color:var(--ink-muted); border:1px solid var(--rule); border-radius:999px; padding:6px 14px; cursor:pointer; }
+    .filter-btn.is-active, .filter-btn[aria-pressed="true"] { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  </style>
+  <script>
+    const grid = document.getElementById('project-grid');
+    const empty = document.getElementById('project-empty');
+    const btns = document.querySelectorAll('.filter-btn');
+    if (grid && btns.length) {
+      const cards = Array.from(grid.children) as HTMLElement[];
+      btns.forEach(btn => btn.addEventListener('click', () => {
+        const f = (btn as HTMLElement).dataset.filter;
+        btns.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-pressed','false'); });
+        btn.classList.add('is-active'); btn.setAttribute('aria-pressed','true');
+        let vis=0; cards.forEach(c=>{const show=f==='all'||c.getAttribute('data-status')===f; (c as HTMLElement).style.display=show?'':'none'; c.hidden=!show; if(show)vis++;});
+        if(empty) empty.hidden=vis!==0;
+      }));
+    }
+  </script>
+</Base>

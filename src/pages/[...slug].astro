@@ -1,0 +1,342 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../layouts/Base.astro";
+import { postUrl, slugFromFilename, dateFromFilename, normalizeTags, normalizeCategories, readingTime, formatDate, excerptFromBody, sanitizeTitleHtml, plainTitle } from "../utils/slug";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map(post => {
+    const url = postUrl(post);
+    // url like /2024/05/16/slug/ → slug param is "2024/05/16/slug"
+    const slug = url.replace(/^\//, "").replace(/\/$/, "");
+    return { params: { slug }, props: { post } };
+  });
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+function getDate(p: typeof post): Date {
+  if (p.data.date) return new Date(p.data.date);
+  const inf = dateFromFilename(p.id);
+  if (inf) return inf;
+  return new Date(0);
+}
+const date = getDate(post);
+const cats = normalizeCategories(post.data);
+const tags = normalizeTags(post.data);
+const body = post.body ?? "";
+const rt = readingTime(body);
+const rawTitle = post.data.title || slugFromFilename(post.id) || "Untitled";
+const titleHtml = sanitizeTitleHtml(rawTitle);
+const titleText = plainTitle(rawTitle);
+const description = post.data.description || post.data.excerpt || excerptFromBody(body);
+
+// Related: build-time ranking per §6 spec
+const allPosts = await getCollection("posts");
+function scoreRelated(a: typeof post, b: typeof post): number {
+  if (a.id === b.id) return -Infinity;
+  let s = 0;
+  const at = normalizeTags(a.data);
+  const bt = normalizeTags(b.data);
+  const ac = normalizeCategories(a.data);
+  const bc = normalizeCategories(b.data);
+  // series bonus
+  if (a.data.series && b.data.series && a.data.series === b.data.series) s += 50;
+  // tag overlap
+  s += at.filter(t => bt.includes(t)).length * 10;
+  // category overlap
+  s += ac.filter(c => bc.includes(c)).length * 5;
+  return s;
+}
+const related = [...allPosts]
+  .map(p => ({ post: p, score: scoreRelated(post, p) }))
+  .filter(x => x.score > 0)
+  .sort((a,b) => b.score - a.score || getDate(b.post).getTime() - getDate(a.post).getTime())
+  .slice(0, 3);
+
+const siteUrl = Astro.site?.toString() ?? "https://igbanam.com/";
+const canon = new URL(postUrl(post), siteUrl).toString();
+---
+
+<Base title={titleText} description={description} canonical={canon} current="/blog/">
+  <!-- Reading progress -->
+  <div class="progress" aria-hidden="true"><div class="progress__bar" id="progress-bar"></div></div>
+
+  <article class="article">
+    <!-- Eyebrow -->
+    <div class="article__eyebrow font-mono">
+      {cats.length > 0 ? <a href={`/categories/#${encodeURIComponent(cats[0])}`}>{cats[0]}</a> : <span>Essay</span>}
+      <span aria-hidden="true">·</span>
+      <time datetime={date.toISOString()}>{formatDate(date)}</time>
+      <span aria-hidden="true">·</span>
+      <span>{rt} min</span>
+    </div>
+
+    <h1 class="article__title font-display" set:html={titleHtml}></h1>
+    {description && <p class="article__dek">{description}</p>}
+    {post.data.stance && <p class="article__stance font-mono"><strong>Position:</strong> {post.data.stance}</p>}
+
+    {post.data.hot_take && (
+      <blockquote class="article__pullquote">“{post.data.hot_take}”</blockquote>
+    )}
+
+    <!-- TOC (desktop sticky rail + mobile details) -->
+    {headings.length > 1 && (
+      <details class="toc font-mono">
+        <summary>On this page</summary>
+        <nav aria-label="Table of contents">
+          <ol>
+            {headings.map(h => (
+              <li class={`toc-lvl-${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>
+            ))}
+          </ol>
+        </nav>
+      </details>
+    )}
+
+    <div class="article__body font-reading">
+      <Content />
+    </div>
+
+    <!-- Reactions -->
+    <section class="reactions" aria-label="Reactions" data-slug={slugFromFilename(post.id)}>
+      <h2 class="reactions__title font-mono">Your response</h2>
+      <div class="reactions__btns">
+        <button type="button" class="reaction-btn" data-reaction="agree">Agree</button>
+        <button type="button" class="reaction-btn" data-reaction="disagree">Disagree</button>
+        <button type="button" class="reaction-btn" data-reaction="changed" hidden>Changed my mind</button>
+      </div>
+      <p class="reactions__status font-mono" role="status" aria-live="polite"></p>
+      <p class="reactions__note font-mono">Public tally is not enabled yet. Reply in the discussion instead.</p>
+    </section>
+
+    <!-- Reply / Giscus -->
+    <section class="replies" aria-label="Discussion">
+      <button type="button" class="replies__btn font-mono" id="load-giscus">Discuss this essay</button>
+      <div id="giscus-container"></div>
+      <noscript><p class="font-mono" style="font-size:0.8rem; color:var(--ink-muted);"><a href="https://github.com/igbanam/igbanam.github.io/discussions">View discussions on GitHub</a></p></noscript>
+    </section>
+
+    <!-- Related -->
+    {related.length > 0 && (
+      <section class="related">
+        <h2 class="related__title font-display">Related arguments</h2>
+        <ul class="related__list">
+          {related.map(({ post: r, score }) => {
+            const rcats = normalizeCategories(r.data);
+            const reason = r.data.series && post.data.series && r.data.series === post.data.series
+              ? `Part of “${r.data.series}”`
+              : rcats.length ? `Also about ${rcats[0]}` : "From the archive";
+            return (
+              <li>
+                <a href={postUrl(r)} class="related__link" set:html={sanitizeTitleHtml(r.data.title || slugFromFilename(r.id))}></a>
+                <span class="related__reason font-mono">{reason}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )}
+  </article>
+
+  <style>
+    .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 100; pointer-events: none; background: transparent; }
+    .progress__bar { height: 100%; background: var(--proof); transform-origin: left; transform: scaleX(0); }
+    /* CSS scroll-driven animation where supported */
+    @supports (animation-timeline: scroll()) {
+      .progress__bar { animation: progress linear forwards; animation-timeline: scroll(root); }
+      @keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    }
+    .article {
+      padding: var(--s-8) 0 var(--s-12);
+      max-width: 66ch;
+      margin-inline: auto;
+      width: min(100% - 2rem, 66ch);
+    }
+    .article__eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted);
+      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    }
+    .article__eyebrow a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--proof); }
+    .article__title {
+      margin-top: 12px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; font-weight: 800; max-width: 20ch;
+      text-wrap: balance;
+    }
+    .article__title :global(.code) {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.72em; font-weight: 500;
+      background: var(--paper-raised); border: 1px solid var(--rule);
+      padding: 0.08em 0.35em; border-radius: 4px;
+      white-space: nowrap;
+    }
+    .article__dek { margin-top: 12px; font-size: 1.15rem; line-height: 1.5; color: var(--ink-muted); max-width: 66ch; }
+    .article__stance { margin-top: 12px; font-size: 0.8rem; color: var(--ink-muted); }
+    .article__pullquote {
+      margin-top: 20px; border-left: 3px solid var(--proof); padding: 12px 16px;
+      background: var(--paper-raised); font-family: "Newsreader", Georgia, serif; font-style: italic; font-size: 1.1rem; line-height: 1.5;
+    }
+    .toc { margin-top: 20px; border: 1px solid var(--rule); background: var(--paper-raised); }
+    .toc summary { padding: 10px 14px; cursor: pointer; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
+    .toc nav { padding: 0 14px 14px; }
+    .toc ol { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .toc a { font-size: 0.85rem; color: var(--ink-muted); }
+    .toc a:hover, .toc a[aria-current="location"] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--proof); }
+    .toc-lvl-3 { padding-left: 16px; }
+
+    .article__body {
+      margin-top: 24px; font-size: 1.07rem; line-height: 1.75; max-width: 66ch;
+      text-wrap: pretty;
+    }
+    .article__body :global(h2) { font-family: "Newsreader", Georgia, serif; font-size: 1.6rem; line-height: 1.15; margin-top: 2rem; font-weight: 700; }
+    .article__body :global(h3) { font-size: 1.2rem; margin-top: 1.5rem; font-weight: 700; }
+    .article__body :global(p) { margin-top: 1rem; }
+    .article__body :global(a) { color: var(--ink); text-decoration: underline; text-decoration-color: var(--proof); text-decoration-thickness: 2px; text-underline-offset: 2px; }
+    .article__body :global(blockquote) { border-left: 3px solid var(--proof); padding: 8px 16px; margin-top: 1rem; background: var(--paper-raised); font-style: italic; color: var(--ink-muted); }
+    .article__body :global(pre) { background: var(--paper-raised); border: 1px solid var(--rule); padding: 14px; overflow-x: auto; margin-top: 1rem; font-size: 0.85rem; line-height: 1.6; border-radius: 4px; }
+    .article__body :global(code) { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.9em; }
+    .article__body :global(:not(pre) > code) { background: var(--paper-raised); border: 1px solid var(--rule); padding: 1px 5px; border-radius: 3px; }
+    .article__body :global(ul), .article__body :global(ol) { margin-top: 1rem; padding-left: 1.5rem; }
+    .article__body :global(li) { margin-top: 0.35rem; }
+    .article__body :global(img) { margin-top: 1rem; border: 1px solid var(--rule); border-radius: 4px; }
+    .article__body :global(hr) { border: none; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+    /* Code copy button (enhancement injected) */
+    .article__body :global(pre) { position: relative; }
+
+    .reactions { margin-top: 32px; border-top: 1px solid var(--rule); padding-top: 16px; }
+    .reactions__title { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); }
+    .reactions__btns { display: flex; gap: 10px; margin-top: 10px; }
+    .reaction-btn {
+      font-size: 0.8rem; padding: 8px 16px; border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--rule); background: var(--paper); color: var(--ink);
+      min-height: 44px; min-width: 44px;
+    }
+    .reaction-btn.is-chosen { background: var(--proof); color: var(--proof-ink); border-color: var(--proof); }
+    .reactions__status { margin-top: 8px; font-size: 0.75rem; color: var(--ink-muted); }
+    .reactions__note { margin-top: 4px; font-size: 0.7rem; color: var(--ink-muted); font-style: italic; }
+
+    .replies { margin-top: 24px; border-top: 1px solid var(--rule); padding-top: 16px; }
+    .replies__btn {
+      font-size: 0.8rem; letter-spacing: 0.04em; background: var(--paper-raised); border: 1px solid var(--rule);
+      padding: 10px 16px; border-radius: 999px; cursor: pointer; color: var(--ink);
+    }
+
+    .related { margin-top: 32px; border-top: 1px solid var(--rule); padding-top: 16px; }
+    .related__title { font-size: 1.2rem; font-weight: 700; }
+    .related__list { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 10px; }
+    .related__link { font-weight: 600; }
+    .related__link:hover { text-decoration: underline; text-decoration-color: var(--proof); }
+    .related__reason { margin-left: 8px; font-size: 0.7rem; color: var(--ink-muted); letter-spacing: 0.04em; }
+
+    @media (min-width: 70rem) {
+      /* Could add sticky TOC rail here — deferred to keep reading column centered for now */
+    }
+  </style>
+
+  <script>
+    // Progress fallback for non-scroll-timeline engines
+    if (!CSS.supports('animation-timeline: scroll()')) {
+      const bar = document.getElementById('progress-bar');
+      if (bar) {
+        const upd = () => {
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          const pct = max > 0 ? window.scrollY / max : 0;
+          bar.style.transform = `scaleX(${pct})`;
+        };
+        window.addEventListener('scroll', upd, { passive: true });
+        upd();
+      }
+    }
+
+    // Code copy buttons
+    document.querySelectorAll('.article__body pre').forEach(pre => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = 'Copy';
+      btn.className = 'font-mono';
+      btn.style.cssText = 'position:absolute;top:8px;right:8px;font-size:0.65rem;letter-spacing:0.06em;text-transform:uppercase;background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:4px 8px;cursor:pointer;color:var(--ink-muted);';
+      (pre as HTMLElement).style.position = 'relative';
+      pre.appendChild(btn);
+      btn.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.textContent ?? pre.textContent ?? '';
+        try {
+          await navigator.clipboard.writeText(code.replace(btn.textContent??'','').trim());
+          btn.textContent = 'Copied';
+          setTimeout(() => btn.textContent = 'Copy', 1200);
+        } catch { btn.textContent = 'Select and copy'; setTimeout(()=>btn.textContent='Copy', 1500); }
+      });
+    });
+
+    // TOC scroll spy
+    const tocLinks = document.querySelectorAll('.toc a');
+    const headingsEls: HTMLElement[] = Array.from(document.querySelectorAll('.article__body h2, .article__body h3')).filter(el => el.id) as HTMLElement[];
+    if (tocLinks.length && headingsEls.length && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(ent => {
+          if (ent.isIntersecting) {
+            tocLinks.forEach(a => a.removeAttribute('aria-current'));
+            const active = document.querySelector(`.toc a[href="#${ent.target.id}"]`);
+            active?.setAttribute('aria-current','location');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      headingsEls.forEach(el => io.observe(el));
+    }
+
+    // Reactions (localStorage only per spec §6)
+    const reactionsEl = document.querySelector('.reactions') as HTMLElement | null;
+    if (reactionsEl) {
+      const slug = reactionsEl.dataset.slug || 'unknown';
+      const key = `igbanam-reaction:${slug}`;
+      const statusEl = reactionsEl.querySelector('.reactions__status') as HTMLElement | null;
+      const btns = reactionsEl.querySelectorAll('.reaction-btn') as NodeListOf<HTMLButtonElement>;
+      function renderReaction(val: string | null) {
+        btns.forEach(b => {
+          const isChosen = b.dataset.reaction === val;
+          b.classList.toggle('is-chosen', !!isChosen);
+          b.setAttribute('aria-pressed', String(!!isChosen));
+        });
+        // show "Changed my mind" after a choice
+        const changedBtn = reactionsEl!.querySelector('[data-reaction="changed"]') as HTMLElement | null;
+        if (changedBtn) changedBtn.hidden = !val;
+        if (statusEl) statusEl.textContent = val ? `Your response: ${val}. Stored on this device.` : '';
+      }
+      try {
+        const saved = localStorage.getItem(key);
+        if (saved) renderReaction(saved);
+      } catch {}
+      btns.forEach(b => b.addEventListener('click', () => {
+        const r = b.dataset.reaction!;
+        let next: string | null = r;
+        if (r === 'changed') next = null;
+        try { if (next) localStorage.setItem(key, next); else localStorage.removeItem(key); } catch {}
+        renderReaction(next);
+      }));
+    }
+
+    // Giscus lazy-load
+    const giscusBtn = document.getElementById('load-giscus');
+    giscusBtn?.addEventListener('click', () => {
+      if (document.querySelector('script[src*="giscus"]')) return;
+      const s = document.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.setAttribute('data-repo', 'igbanam/igbanam.github.io');
+      s.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnk1Mzk1NDE1OA==');
+      s.setAttribute('data-category', 'Comments');
+      s.setAttribute('data-category-id', 'DIC_kwDOAzdGbs4Ccjjj');
+      s.setAttribute('data-mapping', 'pathname');
+      s.setAttribute('data-strict', '0');
+      s.setAttribute('data-reactions-enabled', '1');
+      s.setAttribute('data-emit-metadata', '0');
+      s.setAttribute('data-input-position', 'bottom');
+      s.setAttribute('data-theme', 'transparent_dark');
+      s.setAttribute('data-lang', 'en');
+      s.crossOrigin = 'anonymous';
+      s.async = true;
+      document.getElementById('giscus-container')?.appendChild(s);
+      (giscusBtn as HTMLButtonElement).textContent = 'Loading discussion…';
+      (giscusBtn as HTMLButtonElement).disabled = true;
+    });
+  </script>
+</Base>

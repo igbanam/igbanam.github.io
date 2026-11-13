@@ -1,0 +1,102 @@
+@import "./tokens.css";
+
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: auto;
+  scrollbar-gutter: stable;
+}
+
+body {
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute;
+  top: 0; left: 0;
+  padding: var(--s-2) var(--s-4);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  transform: translateY(-100%);
+  z-index: 9999;
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* ── Typography roles — §4.2 ── */
+.font-display {
+  font-family: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-optical-sizing: auto;
+}
+.font-reading {
+  font-family: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+}
+.font-mono {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ── Layout primitives ── */
+.canvas {
+  width: var(--canvas);
+  margin-inline: auto;
+}
+.reading {
+  width: var(--reading);
+  max-width: 100%;
+}
+.wide {
+  width: var(--wide);
+  margin-inline: auto;
+}
+
+/* ── Hairline rule ── */
+.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+}
+
+/* ── Proof mark underline ── */
+.proof-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--proof);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--proof);
+  color: var(--proof-ink);
+}

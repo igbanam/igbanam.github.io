@@ -1,0 +1,65 @@
+---
+interface Props {
+  latest: { title: string; href: string; date: string };
+  building: { label: string; href: string };
+  reading: { label: string; href: string };
+}
+const { latest, building, reading } = Astro.props;
+---
+
+<section class="now-strip" aria-label="Now">
+  <div class="canvas now-strip__inner">
+    <a href={latest.href} class="now-item">
+      <span class="now-label font-mono">Latest</span>
+      <span class="now-value">{latest.title} · {latest.date}</span>
+      <span aria-hidden="true" class="now-arrow">→</span>
+    </a>
+    <a href={building.href} class="now-item">
+      <span class="now-label font-mono">Building</span>
+      <span class="now-value">{building.label}</span>
+      <span aria-hidden="true" class="now-arrow">→</span>
+    </a>
+    <a href={reading.href} class="now-item">
+      <span class="now-label font-mono">Reading</span>
+      <span class="now-value">{reading.label}</span>
+      <span aria-hidden="true" class="now-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .now-strip {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .now-strip__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .now-item {
+    display: flex; align-items: baseline; gap: 8px;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    border-right: 1px solid var(--rule);
+    transition: background var(--motion-micro) var(--ease-standard);
+  }
+  .now-item:last-child { border-right: none; }
+  .now-item:hover { background: var(--paper-raised); }
+  .now-label {
+    font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-muted); flex-shrink: 0;
+  }
+  .now-value {
+    flex: 1; min-width: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .now-arrow { color: var(--ink-muted); flex-shrink: 0; }
+  .now-item:hover .now-arrow { color: var(--ink); }
+
+  @media (max-width: 720px) {
+    .now-strip__inner { grid-template-columns: 1fr; }
+    .now-item { border-right: none; border-bottom: 1px solid var(--rule); }
+    .now-item:last-child { border-bottom: none; }
+  }
+</style>
