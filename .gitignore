@@ -23,5 +23,11 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# jekyll leftovers
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+_site/
+
 # worktrees
 .worktrees/
